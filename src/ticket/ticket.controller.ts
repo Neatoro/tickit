@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { TicketService } from './ticket.service';
 import { CreateTicketDTO } from './ticket.interface';
 
@@ -13,5 +13,12 @@ export class TicketController {
       summary: dto.summary,
       fields: dto.fields
     });
+  }
+
+  @Get('/search')
+  async search() {
+    return {
+      data: await this.ticketService.search()
+    };
   }
 }

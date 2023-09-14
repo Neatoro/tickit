@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { FieldValues, Ticket } from './ticket.entities';
+import { FieldValues, Ticket, TicketSchema } from './ticket.entities';
 import { CreateTicketDTO } from './ticket.interface';
 import { Injectable } from '@nestjs/common';
 
@@ -24,5 +24,22 @@ export class TicketService {
     await queryRunner.connect();
 
     return await queryRunner.manager.save(ticket);
+  }
+
+  async search() {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+
+    const result = await queryRunner.manager.find(TicketSchema, {
+      relations: ['fields']
+    });
+
+    return result.map((ticket) => ({
+      ...ticket,
+      fields: ticket.fields.reduce(
+        (fields, field) => ({ ...fields, [field.field]: field.value }),
+        {}
+      )
+    }));
   }
 }
