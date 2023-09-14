@@ -1,0 +1,29 @@
+id: STP
+
+name: Simple Test Project
+
+issuetypes:
+  - name: Task
+    fields:
+      - id: description
+        name: Description
+        type: longtext
+        required: true
+  - name: Bug
+    fields:
+      - id: description
+        name: Description
+        type: longtext
+        required: true
+      - id: steps_to_reproduce
+        name: Steps to Reproduce
+        type: longtext
+        required: true
+      - id: actual_behavior
+        name: Actual Behavior
+        type: longtext
+        required: true
+      - id: expected_behavior
+        name: Expected Behavior
+        type: longtext
+        required: true
