@@ -1,3 +1,3 @@
-import { FieldValues, Ticket } from '../ticket/ticket.entities';
+import { FieldValuesSchema, TicketSchema } from '../ticket/ticket.entities';
 
-export default [Ticket, FieldValues];
+export default [TicketSchema, FieldValuesSchema];

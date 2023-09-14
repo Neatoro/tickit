@@ -1,15 +1,28 @@
-import { Repository } from 'typeorm';
-import { Ticket } from './ticket.entities';
-import { InjectRepository } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
+import { FieldValues, Ticket } from './ticket.entities';
+import { CreateTicketDTO } from './ticket.interface';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class TicketService {
-  constructor(
-    @InjectRepository(Ticket)
-    private readonly ticketRepository: Repository<Ticket>
-  ) {}
+  constructor(private readonly dataSource: DataSource) {}
 
-  async create(dbo) {
-    const ticket = this.ticketRepository.create(dbo);
-    return await this.ticketRepository.save(ticket);
+  async create(dto: CreateTicketDTO) {
+    const fields = Object.keys(dto.fields)
+      .map((field) => ({
+        field,
+        value: dto.fields[field]
+      }))
+      .map((field) => new FieldValues(field));
+
+    const ticket = new Ticket({
+      ...dto,
+      fields
+    });
+
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+
+    return await queryRunner.manager.save(ticket);
   }
 }

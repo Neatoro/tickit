@@ -1,37 +1,105 @@
-import {
-  Column,
-  Entity,
-  Generated,
-  ManyToMany,
-  OneToMany,
-  PrimaryColumn
-} from 'typeorm';
+import { EntitySchema } from 'typeorm';
 
-@Entity()
 export class Ticket {
-  @PrimaryColumn()
-  //@Generated('increment')
+  constructor(
+    args: {
+      project?: string;
+      summary?: string;
+      fields?: FieldValues[];
+    } = {}
+  ) {
+    this.project = args.project;
+    this.summary = args.summary;
+    this.fields = args.fields;
+  }
+
   id: number;
 
-  @PrimaryColumn()
   project: string;
 
-  @Column()
   summary: string;
 
-  @OneToMany(() => FieldValues, (fieldValue) => fieldValue.ticket)
   fields: FieldValues[];
 }
 
-@Entity()
+export const TicketSchema = new EntitySchema<Ticket>({
+  name: 'Ticket',
+  target: Ticket,
+  columns: {
+    id: {
+      type: Number,
+      primary: true,
+      nullable: false
+    },
+    project: {
+      type: String,
+      primary: true,
+      nullable: false
+    },
+    summary: {
+      type: String,
+      nullable: false
+    }
+  },
+  relations: {
+    fields: {
+      target: () => FieldValues,
+      type: 'one-to-many',
+      cascade: true,
+      inverseSide: 'ticket'
+    }
+  }
+});
+
 export class FieldValues {
-  @PrimaryColumn()
-  @ManyToMany(() => Ticket, (ticket) => ticket.fields)
+  constructor(args: { field?: string; value?: string } = {}) {
+    this.field = args.field;
+    this.value = args.value;
+  }
+
   ticket: number;
 
-  @PrimaryColumn()
+  project: string;
+
   field: string;
 
-  @Column({ nullable: true })
   value: string;
 }
+
+export const FieldValuesSchema = new EntitySchema<FieldValues>({
+  name: 'FieldValues',
+  target: FieldValues,
+  columns: {
+    ticket: {
+      type: Number,
+      primary: true,
+      nullable: true
+    },
+    project: {
+      type: String,
+      primary: true,
+      nullable: true
+    },
+    field: {
+      type: String,
+      primary: true,
+      nullable: false
+    },
+    value: {
+      type: String,
+      nullable: true
+    }
+  },
+  relations: {
+    ticket: {
+      primary: true,
+      target: () => Ticket,
+      type: 'many-to-one',
+      nullable: false,
+      joinColumn: [
+        { name: 'ticket', referencedColumnName: 'id' },
+        { name: 'project', referencedColumnName: 'project' }
+      ]
+    }
+  }
+});
