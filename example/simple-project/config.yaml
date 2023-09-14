@@ -1,4 +1,8 @@
 port: 3000
 
+database:
+  type: sqlite
+  database: test.db
+
 projects:
   - test
