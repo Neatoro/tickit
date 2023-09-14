@@ -7,24 +7,24 @@ import subscribers from './subscribers';
 import { TicketModule } from '../ticket/ticket.module';
 
 @Module({
-    imports: [
-        ConfigModule.forRoot({
-            isGlobal: true,
-            load: [loadServerConfig]
-        }),
-        TypeOrmModule.forRootAsync({
-            async useFactory(configService: ConfigService) {
-                const baseConfig = configService.get('database');
-                return {
-                    ...baseConfig,
-                    entities: entities,
-                    subscribers: subscribers,
-                    synchronize: true
-                };
-            },
-            inject: [ConfigService]
-        }),
-        TicketModule
-    ]
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [loadServerConfig]
+    }),
+    TypeOrmModule.forRootAsync({
+      async useFactory(configService: ConfigService) {
+        const baseConfig = configService.get('database');
+        return {
+          ...baseConfig,
+          entities: entities,
+          subscribers: subscribers,
+          synchronize: true
+        };
+      },
+      inject: [ConfigService]
+    }),
+    TicketModule
+  ]
 })
 export class AppModule {}

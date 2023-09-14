@@ -14,9 +14,7 @@ async function loadYAML(path) {
 
     return yaml;
   } catch {
-    throw new Error(
-      `${path} not found`
-    );
+    throw new Error(`${path} not found`);
   }
 }
 

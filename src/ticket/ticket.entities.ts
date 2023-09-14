@@ -1,8 +1,14 @@
-import { Column, Entity, Generated, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  ManyToMany,
+  OneToMany,
+  PrimaryColumn
+} from 'typeorm';
 
 @Entity()
 export class Ticket {
-
   @PrimaryColumn()
   //@Generated('increment')
   id: number;
@@ -14,13 +20,11 @@ export class Ticket {
   summary: string;
 
   @OneToMany(() => FieldValues, (fieldValue) => fieldValue.ticket)
-  fields: FieldValues[]
-
-};
+  fields: FieldValues[];
+}
 
 @Entity()
 export class FieldValues {
-
   @PrimaryColumn()
   @ManyToMany(() => Ticket, (ticket) => ticket.fields)
   ticket: number;
@@ -30,5 +34,4 @@ export class FieldValues {
 
   @Column({ nullable: true })
   value: string;
-
 }
