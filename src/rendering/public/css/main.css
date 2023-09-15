@@ -2,6 +2,7 @@
 
 @import 'reset.css';
 
+@import 'components/badge.css';
 @import 'components/box.css';
 @import 'components/breadcumb.css';
 @import 'components/navigation.css';
@@ -20,6 +21,8 @@
 
   --primary-color: #012b51;
   --secondary-color: #fe5d26;
+
+  --green: #2fbf71;
 }
 
 * {

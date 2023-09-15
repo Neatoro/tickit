@@ -15,12 +15,17 @@ export class RootRendering {
     const tickets = await this.ticketService.search();
 
     return {
-      tickets: tickets.map((ticket) => ({
-        ...ticket,
-        project: this.configService
+      tickets: tickets.map((ticket) => {
+        const project = this.configService
           .get('projects')
-          .find((project) => project.id == ticket.project)
-      }))
+          .find((project) => project.id == ticket.project);
+
+        return {
+          ...ticket,
+          project,
+          status: project.status.find((status) => status.name === ticket.status)
+        };
+      })
     };
   }
 }

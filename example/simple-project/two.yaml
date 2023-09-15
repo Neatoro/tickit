@@ -2,6 +2,15 @@ id: VT
 
 name: Vacation Trip
 
+status:
+  - name: Open
+    type: open
+    default: true
+  - name: In Progress
+    type: in_progress
+  - name: Done
+    type: done
+
 tickettypes:
   - name: Task
     fields:

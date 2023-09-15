@@ -7,12 +7,14 @@ export class Ticket {
       summary?: string;
       fields?: FieldValues[];
       type?: string;
+      status?: string;
     } = {}
   ) {
     this.project = args.project;
     this.summary = args.summary;
     this.fields = args.fields;
     this.type = args.type;
+    this.status = args.status;
   }
 
   id: number;
@@ -24,6 +26,8 @@ export class Ticket {
   type: string;
 
   fields: FieldValues[];
+
+  status: string;
 }
 
 export const TicketSchema = new EntitySchema<Ticket>({
@@ -45,6 +49,10 @@ export const TicketSchema = new EntitySchema<Ticket>({
       nullable: false
     },
     type: {
+      type: String,
+      nullable: false
+    },
+    status: {
       type: String,
       nullable: false
     }

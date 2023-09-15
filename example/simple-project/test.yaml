@@ -2,6 +2,23 @@ id: STP
 
 name: Simple Test Project
 
+status:
+  - name: Open
+    type: open
+    default: true
+  - name: To Be Refined
+    type: open
+  - name: Ready
+    type: open
+  - name: In Progress
+    type: in_progress
+  - name: In Review
+    type: in_progress
+  - name: Done
+    type: done
+  - name: Archived
+    type: done
+
 tickettypes:
   - name: Task
     fields:

@@ -15,6 +15,9 @@
       Summary
     </th>
     <th>
+      Status
+    </th>
+    <th>
       Project
     </th>
   </thead>
@@ -26,6 +29,7 @@
           >{{project.id}}-{{id}}</a></td>
         <td>{{type}}</td>
         <td>{{summary}}</td>
+        <td><span class="badge badge-status-{{status.type}}">{{status.name}}</span></td>
         <td>{{project.name}}</td>
       </tr>
     {{/each}}
