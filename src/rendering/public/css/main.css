@@ -73,6 +73,6 @@ body {
   height: 1.3rem;
   stroke-width: 0;
   stroke: currentColor;
-  fill: #fff;
+  fill: currentColor;
   margin-right: 16px;
 }

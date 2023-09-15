@@ -16,13 +16,15 @@
 }
 
 .navigation__item {
-  padding: 16px 0;
+  padding: 32px 0;
   font-size: 1.2rem;
 
   border-bottom: 1px solid #ebebeb;
 
   display: flex;
   align-items: center;
+
+  color: #fff;
 }
 
 .navigation__item:last-child {
@@ -30,10 +32,10 @@
 }
 
 .navigation__item a {
-  color: #fff;
+  color: currentColor;
   text-decoration: none;
 }
 
-.navigation__item:hover a {
-  color: #c2e2fe;
+.navigation__item:hover {
+  color: var(--secondary-color);
 }
