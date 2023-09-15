@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+const fieldValueValidators = {
+  default: () => false,
+  longtext: (value) => typeof value === 'string' || value instanceof String
+};
+
 class Validation {
   private readonly validations: { validate: Function; error: string }[] = [];
   private readonly errors: string[] = [];
@@ -82,13 +87,14 @@ class Validation {
   private isValidFieldValue(validFields, field) {
     this.validations.push({
       validate: () => {
-        const configField = validFields.find((validField) => validField.id === field.field) || {};
+        const configField = validFields.find(
+          (validField) => validField.id === field.field
+        ) || { type: 'default' };
 
-        if (configField.required) {
-          return !!field.value;
-        }
-
-        return true;
+        return (
+          (!configField.required || !!field.value) &&
+          fieldValueValidators[configField.type](field.value)
+        );
       },
       error: `Invalid field value for "${field.field}" (${field.value})`
     });
@@ -101,7 +107,11 @@ class Validation {
 
         return validFields
           .map((validField) => validField.id)
-          .reduce((acc, validFieldId) => acc && providedFieldIds.includes(validFieldId), true);
+          .reduce(
+            (acc, validFieldId) =>
+              acc && providedFieldIds.includes(validFieldId),
+            true
+          );
       },
       error: `Missing required fields`
     });
