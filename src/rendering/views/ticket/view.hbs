@@ -12,6 +12,12 @@
       <span class="badge badge-status-{{ticket.status.type}}">{{ticket.status.name}}</span>
     </p>
   </section>
+  <section class='ticket-field'>
+    <h2 class='ticket-field__title'>Type</h2>
+    <p class='ticket-field__value'>
+      {{ticket.type}}
+    </p>
+  </section>
   {{#each schema}}
   <section class='ticket-field'>
     <h2 class='ticket-field__title'>{{name}}</h2>
