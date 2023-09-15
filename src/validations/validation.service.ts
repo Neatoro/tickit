@@ -42,6 +42,39 @@ class Validation {
     return this;
   }
 
+  areValidFields(
+    projectId: string,
+    typeName: string,
+    fields: Record<string, any>
+  ): Validation {
+    const project = this.configService
+      .get('projects')
+      .find((project) => project.id === projectId) || { tickettypes: [] };
+
+    const type = project.tickettypes.find((type) => type.name === typeName) || {
+      fields: []
+    };
+
+    const transformedFields = Object.keys(fields).map((fieldKey) => ({
+      field: fieldKey,
+      value: fields[fieldKey]
+    }));
+    for (const field of transformedFields) {
+      this.isValidField(type.fields, field);
+    }
+
+    return this;
+  }
+
+  private isValidField(validFields, field) {
+    this.validations.push({
+      validate: () =>
+        validFields.filter((validField) => validField.id === field.field)
+          .length === 1,
+      error: `Invalid field "${field.field}"`
+    });
+  }
+
   async validate(): Promise<{ result: boolean; errors: string[] }> {
     const results = await Promise.all(
       this.validations.map(async (validation) => {

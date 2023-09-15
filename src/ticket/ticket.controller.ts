@@ -22,6 +22,7 @@ export class TicketController {
       .createValidation()
       .isValidProject(dto.project)
       .isValidTicketType(dto.project, dto.type)
+      .areValidFields(dto.project, dto.type, dto.fields)
       .validate();
 
     if (!validationResult.result) {
