@@ -32,7 +32,7 @@ body {
   height: 100vh;
 
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 4fr;
   grid-template-rows: 80px 1fr;
 }
 
@@ -58,6 +58,9 @@ body {
   font-size: 1.2rem;
 
   border-bottom: 1px solid #ebebeb;
+
+  display: flex;
+  align-items: center;
 }
 
 .navigation__item:last-child {
@@ -146,4 +149,14 @@ body {
 .breadcumb {
   margin-bottom: 16px;
   font-size: 0.8rem;
+}
+
+.icon {
+  display: inline-block;
+  width: 1.3rem;
+  height: 1.3rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: #fff;
+  margin-right: 16px;
 }
