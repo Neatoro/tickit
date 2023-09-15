@@ -2,10 +2,11 @@ import { DataSource } from 'typeorm';
 import { FieldValues, Ticket, TicketSchema } from './ticket.entities';
 import { CreateTicketDTO } from './ticket.interface';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TicketService {
-  constructor(private readonly dataSource: DataSource) {}
+  constructor(private readonly dataSource: DataSource, private readonly configService: ConfigService) {}
 
   async create(dto: CreateTicketDTO) {
     const fields = Object.keys(dto.fields)
@@ -41,5 +42,21 @@ export class TicketService {
         {}
       )
     }));
+  }
+
+  getSchema(projectId: string, typeName: string) {
+    const project = this.configService.get('projects').find((project) => project.id === projectId);
+
+    if (!project) {
+      throw new Error(`Could not find project "${projectId}"`);
+    }
+
+    const type = project.tickettypes.find((type) => type.name === typeName);
+
+    if (type) {
+      return type.fields;
+    } else {
+      throw new Error(`Could not find tickettype "${typeName}" in project "${projectId}"`);
+    }
   }
 }
