@@ -8,6 +8,9 @@
   </head>
   <body>
     <main class='box'>
+      <p class='breadcumb'>
+        <a href='/project/{{project.id}}'>{{project.name}}</a>
+      </p>
       <h1 class='box__title'>{{ticket.summary}}</h1>
       {{#each schema}}
         <section class='ticket-field'>

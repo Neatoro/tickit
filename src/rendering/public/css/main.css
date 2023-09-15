@@ -11,10 +11,16 @@
   --box-radius: 8px;
 
   --base-font-color: #333;
+
+  --link-color: #297373;
 }
 
 * {
   box-sizing: border-box;
+}
+
+a {
+  color: var(--link-color);
 }
 
 body {
@@ -84,4 +90,9 @@ body {
 
 .ticket-field__value {
   font-size: 1rem;
+}
+
+.breadcumb {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
 }
