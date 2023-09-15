@@ -1,0 +1,24 @@
+.table-list {
+  width: 100%;
+  border-radius: var(--box-radius);
+}
+
+.table-list__header {
+  border-bottom: 1px solid #ebebeb;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.table-list__header th,
+.table-list__body td {
+  padding: 16px 8px;
+}
+
+.table-list__header th:first-child,
+.table-list__body td:first-child {
+  padding-left: 8px;
+}
+
+.table-list__body tr:hover {
+  background-color: #c2e2fe;
+}

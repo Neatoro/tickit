@@ -2,6 +2,12 @@
 
 @import 'reset.css';
 
+@import 'components/box.css';
+@import 'components/breadcumb.css';
+@import 'components/navigation.css';
+@import 'components/table-list.css';
+@import 'components/ticket-field.css';
+
 :root {
   --main-background: #edede9;
 
@@ -36,69 +42,12 @@ body {
   grid-template-rows: 80px 1fr;
 }
 
-.navigation {
-  grid-row: span 2;
-
-  padding: 32px;
-
-  background-color: #012b51;
-}
-
-.navigation__title {
-  font-weight: 700;
-  font-size: 1.8rem;
-
-  color: #fff;
-
-  margin-bottom: 32px;
-}
-
-.navigation__item {
-  padding: 16px 0;
-  font-size: 1.2rem;
-
-  border-bottom: 1px solid #ebebeb;
-
-  display: flex;
-  align-items: center;
-}
-
-.navigation__item:last-child {
-  border-bottom: none;
-}
-
-.navigation__item a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.navigation__item:hover a {
-  color: #c2e2fe;
-}
-
 .app__header {
   background-color: var(--box-background);
   box-shadow: var(--box-shadow);
 }
 
 .app__content {
-  padding: 16px;
-}
-
-@media (min-width: 1500px) {
-  .app__content {
-    width: 80%;
-    margin: 0 auto;
-  }
-}
-
-.box {
-  background-color: var(--box-background);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--box-radius);
-
-  color: var(--base-font-color);
-
   padding: 16px;
 }
 
@@ -111,44 +60,11 @@ body {
   color: var(--primary-color);
 }
 
-.table-list {
-  width: 100%;
-  border-radius: var(--box-radius);
-}
-
-.table-list__header {
-  border-bottom: 1px solid #ebebeb;
-  text-align: left;
-  font-size: 0.8rem;
-}
-
-.table-list__header th,
-.table-list__body td {
-  padding: 16px 8px;
-}
-
-.table-list__header th:first-child,
-.table-list__body td:first-child {
-  padding-left: 8px;
-}
-
-.table-list__body tr:hover {
-  background-color: #c2e2fe;
-}
-
-.ticket-field__title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.ticket-field__value {
-  font-size: 1rem;
-}
-
-.breadcumb {
-  margin-bottom: 16px;
-  font-size: 0.8rem;
+@media (min-width: 1500px) {
+  .app__content {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 .icon {

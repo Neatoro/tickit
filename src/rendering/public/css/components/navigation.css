@@ -1,0 +1,39 @@
+.navigation {
+  grid-row: span 2;
+
+  padding: 32px;
+
+  background-color: #012b51;
+}
+
+.navigation__title {
+  font-weight: 700;
+  font-size: 1.8rem;
+
+  color: #fff;
+
+  margin-bottom: 32px;
+}
+
+.navigation__item {
+  padding: 16px 0;
+  font-size: 1.2rem;
+
+  border-bottom: 1px solid #ebebeb;
+
+  display: flex;
+  align-items: center;
+}
+
+.navigation__item:last-child {
+  border-bottom: none;
+}
+
+.navigation__item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navigation__item:hover a {
+  color: #c2e2fe;
+}
