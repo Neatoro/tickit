@@ -11,6 +11,7 @@ import { ValidationModule } from '../validations/validation.module';
     ValidationModule
   ],
   controllers: [TicketController],
-  providers: [TicketService]
+  providers: [TicketService],
+  exports: [TicketService]
 })
 export class TicketModule {}

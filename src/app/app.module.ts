@@ -6,6 +6,7 @@ import entities from './entities';
 import subscribers from './subscribers';
 import { TicketModule } from '../ticket/ticket.module';
 import { ValidationModule } from '../validations/validation.module';
+import { RenderingModule } from '../rendering/rendering.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { ValidationModule } from '../validations/validation.module';
       inject: [ConfigService]
     }),
     TicketModule,
-    ValidationModule
+    ValidationModule,
+    RenderingModule
   ]
 })
 export class AppModule {}

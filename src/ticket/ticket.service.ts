@@ -6,7 +6,10 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TicketService {
-  constructor(private readonly dataSource: DataSource, private readonly configService: ConfigService) {}
+  constructor(
+    private readonly dataSource: DataSource,
+    private readonly configService: ConfigService
+  ) {}
 
   async create(dto: CreateTicketDTO) {
     const fields = Object.keys(dto.fields)
@@ -27,6 +30,27 @@ export class TicketService {
     return await queryRunner.manager.save(ticket);
   }
 
+  async get(projectId: string, id: number) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+
+    const ticket = await queryRunner.manager.findOne(TicketSchema, {
+      relations: ['fields'],
+      where: {
+        project: projectId,
+        id
+      }
+    });
+
+    return {
+      ...ticket,
+      fields: ticket.fields.reduce(
+        (fields, field) => ({ ...fields, [field.field]: field.value }),
+        {}
+      )
+    };
+  }
+
   async search() {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
@@ -45,7 +69,9 @@ export class TicketService {
   }
 
   getSchema(projectId: string, typeName: string) {
-    const project = this.configService.get('projects').find((project) => project.id === projectId);
+    const project = this.configService
+      .get('projects')
+      .find((project) => project.id === projectId);
 
     if (!project) {
       throw new Error(`Could not find project "${projectId}"`);
@@ -56,7 +82,9 @@ export class TicketService {
     if (type) {
       return type.fields;
     } else {
-      throw new Error(`Could not find tickettype "${typeName}" in project "${projectId}"`);
+      throw new Error(
+        `Could not find tickettype "${typeName}" in project "${projectId}"`
+      );
     }
   }
 }

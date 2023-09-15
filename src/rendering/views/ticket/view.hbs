@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TickIt - {{ticket.project}}-{{ticket.id}}</title>
+</head>
+<body>
+    <main>
+        <h1>{{ticket.summary}}</h1>
+        {{#each schema}}
+        <h2>{{name}}</h2>
+        <p>{{lookup @root.ticket.fields id}}</p>
+        {{/each}}
+    </main>
+</body>
+</html>
