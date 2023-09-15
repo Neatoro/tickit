@@ -59,8 +59,12 @@ class Validation {
       field: fieldKey,
       value: fields[fieldKey]
     }));
+
+    this.hasAllRequiredFields(type.fields, transformedFields);
+
     for (const field of transformedFields) {
       this.isValidField(type.fields, field);
+      this.isValidFieldValue(type.fields, field);
     }
 
     return this;
@@ -72,6 +76,34 @@ class Validation {
         validFields.filter((validField) => validField.id === field.field)
           .length === 1,
       error: `Invalid field "${field.field}"`
+    });
+  }
+
+  private isValidFieldValue(validFields, field) {
+    this.validations.push({
+      validate: () => {
+        const configField = validFields.find((validField) => validField.id === field.field) || {};
+
+        if (configField.required) {
+          return !!field.value;
+        }
+
+        return true;
+      },
+      error: `Invalid field value for "${field.field}" (${field.value})`
+    });
+  }
+
+  private hasAllRequiredFields(validFields, fields) {
+    this.validations.push({
+      validate: () => {
+        const providedFieldIds = fields.map((field) => field.field);
+
+        return validFields
+          .map((validField) => validField.id)
+          .reduce((acc, validFieldId) => acc && providedFieldIds.includes(validFieldId), true);
+      },
+      error: `Missing required fields`
     });
   }
 
