@@ -1,19 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>TickIt</title>
-</head>
-<body>
-    <main>
-        <ul>
-            {{#each tickets}}
-            <li>
-                <a href="/ticket/{{project}}/{{id}}">{{project}}-{{id}}</a> {{summary}}
-            </li>
-            {{/each}}
-        </ul>
+
+    <link href='/css/main.css' rel='stylesheet' />
+  </head>
+  <body>
+    <main class='box'>
+      <h1 class='box__title'>Tickets</h1>
+      <table class='table-list'>
+        <thead class='table-list__header'>
+          <th>
+            Ticket-ID
+          </th>
+          <th>
+            Summary
+          </th>
+          <th>
+            Project
+          </th>
+        </thead>
+        <tbody class='table-list__body'>
+          {{#each tickets}}
+            <tr class='table-list__element'>
+              <td><a
+                  href='/ticket/{{project.id}}/{{id}}'
+                >{{project.id}}-{{id}}</a></td>
+              <td>{{summary}}</td>
+              <td>{{project.name}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </main>
-</body>
+  </body>
 </html>

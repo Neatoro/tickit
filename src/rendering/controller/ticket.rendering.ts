@@ -1,9 +1,13 @@
 import { Controller, Get, Param, ParseIntPipe, Render } from '@nestjs/common';
 import { TicketService } from '../../ticket/ticket.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('/ticket')
 export class TicketRendering {
-  constructor(private readonly ticketService: TicketService) {}
+  constructor(
+    private readonly ticketService: TicketService,
+    private readonly configService: ConfigService
+  ) {}
 
   @Get('/:projectId/:id')
   @Render('ticket/view')
@@ -14,6 +18,10 @@ export class TicketRendering {
     const ticket = await this.ticketService.get(projectId, id);
     const schema = this.ticketService.getSchema(projectId, ticket.type);
 
-    return { ticket, schema };
+    const project = this.configService
+      .get('projects')
+      .find((project) => project.id == projectId);
+
+    return { ticket, schema, project };
   }
 }

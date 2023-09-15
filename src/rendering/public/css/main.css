@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap');
+
+@import 'reset.css';
+
+:root {
+  --main-background: #edede9;
+
+  --box-background: #fff;
+  --box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  --box-radius: 8px;
+
+  --base-font-color: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--main-background);
+  font-family: 'Titillium Web', sans-serif;
+
+  width: 100vw;
+  height: 100vh;
+
+  margin: auto;
+  padding: 16px;
+}
+
+@media (min-width: 1024px) {
+  body {
+    width: 70vw;
+  }
+}
+
+.box {
+  background-color: var(--box-background);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--box-radius);
+
+  color: var(--base-font-color);
+
+  padding: 16px;
+}
+
+.box__title {
+  font-weight: 700;
+  font-size: 1.8rem;
+
+  margin-bottom: 8px;
+}
+
+.table-list {
+  width: 100%;
+  border-radius: var(--box-radius);
+}
+
+.table-list__header {
+  border-bottom: 1px solid #ebebeb;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.table-list__header th,
+.table-list__body td {
+  padding: 16px 8px;
+}
+
+.table-list__header th:first-child,
+.table-list__body td:first-child {
+  padding-left: 8px;
+}
+
+.table-list__body tr:hover {
+  background-color: #edede9;
+}
+
+.ticket-field__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ticket-field__value {
+  font-size: 1rem;
+}
