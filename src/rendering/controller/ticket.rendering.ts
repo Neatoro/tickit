@@ -22,6 +22,17 @@ export class TicketRendering {
       .get('projects')
       .find((project) => project.id == projectId);
 
-    return { ticket, schema, project };
+    const status = project.status.find(
+      (status) => status.name === ticket.status
+    );
+
+    return {
+      ticket: {
+        ...ticket,
+        status
+      },
+      schema,
+      project
+    };
   }
 }

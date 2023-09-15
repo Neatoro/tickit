@@ -5,7 +5,13 @@
   <a href='/ticket/{{project.id}}/{{ticket.id}}'>{{project.id}}-{{ticket.id}}</a>
 </p>
 <h1 class='app__title'>{{ticket.summary}}</h1>
-<div class="box">
+<div class="box ticket-fields">
+  <section class='ticket-field'>
+    <h2 class='ticket-field__title'>Status</h2>
+    <p class='ticket-field__value'>
+      <span class="badge badge-status-{{ticket.status.type}}">{{ticket.status.name}}</span>
+    </p>
+  </section>
   {{#each schema}}
   <section class='ticket-field'>
     <h2 class='ticket-field__title'>{{name}}</h2>
