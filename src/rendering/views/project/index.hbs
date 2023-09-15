@@ -1,0 +1,26 @@
+{{#> layout}}
+<p class='breadcumb'>
+  <a href='/project'>Projects</a>
+</p>
+<h1 class='app__title'>Projects</h1>
+<table class='table-list box'>
+  <thead class='table-list__header'>
+    <th>
+      Project-ID
+    </th>
+    <th>
+      Project Name
+    </th>
+  </thead>
+  <tbody class='table-list__body'>
+    {{#each projects}}
+      <tr class='table-list__element'>
+        <td><a
+            href='/project/{{id}}'
+          >{{id}}</a></td>
+        <td>{{name}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/layout}}

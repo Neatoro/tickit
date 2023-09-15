@@ -1,8 +1,9 @@
 {{#> layout }}
 <p class='breadcumb'>
-  <a href='/project'>Home</a>
+  <a href='/project'>Projects</a> >
+  <a href='/project/{{project.id}}'>{{project.name}}</a>
 </p>
-<h1 class='app__title'>Overview</h1>
+<h1 class='app__title'>{{project.id}} - {{project.name}}</h1>
 <table class='table-list box'>
   <thead class='table-list__header'>
     <th>

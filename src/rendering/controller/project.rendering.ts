@@ -9,19 +9,30 @@ export class ProjectRendering {
     private readonly configService: ConfigService
   ) {}
 
+  @Get()
+  @Render('project/index')
+  async root() {
+    return {
+      projects: this.configService.get('projects')
+    };
+  }
+
   @Get('/:projectId')
-  @Render('index')
-  async root(@Param('projectId') projectId: string) {
+  @Render('project/view')
+  async single(@Param('projectId') projectId: string) {
     const tickets = await this.ticketService.search({
       project: projectId
     });
 
+    const project = this.configService
+      .get('projects')
+      .find((project) => project.id == projectId);
+
     return {
+      project,
       tickets: tickets.map((ticket) => ({
         ...ticket,
-        project: this.configService
-          .get('projects')
-          .find((project) => project.id == ticket.project)
+        project
       }))
     };
   }
