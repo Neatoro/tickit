@@ -1,23 +1,16 @@
-<html lang='en'>
-  <head>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>TickIt - {{project.id}}-{{ticket.id}}</title>
-
-    <link href='/css/main.css' rel='stylesheet' />
-  </head>
-  <body>
-    <main class='box'>
-      <p class='breadcumb'>
-        <a href='/project/{{project.id}}'>{{project.name}}</a>
-      </p>
-      <h1 class='box__title'>{{ticket.summary}}</h1>
-      {{#each schema}}
-        <section class='ticket-field'>
-          <h2 class='ticket-field__title'>{{name}}</h2>
-          <p class='ticket-field__value'>{{lookup @root.ticket.fields id}}</p>
-        </section>
-      {{/each}}
-    </main>
-  </body>
-</html>
+{{#> layout}}
+<p class='breadcumb'>
+  <a href='/project'>Projects</a> >
+  <a href='/project/{{project.id}}'>{{project.name}}</a> >
+  <a href='/ticket/{{project.id}}/{{ticket.id}}'>{{project.id}}-{{ticket.id}}</a>
+</p>
+<h1 class='app__title'>{{ticket.summary}}</h1>
+<div class="box">
+  {{#each schema}}
+  <section class='ticket-field'>
+    <h2 class='ticket-field__title'>{{name}}</h2>
+    <p class='ticket-field__value'>{{lookup @root.ticket.fields id}}</p>
+  </section>
+  {{/each}}
+</div>
+{{/layout}}

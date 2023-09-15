@@ -12,7 +12,8 @@
 
   --base-font-color: #333;
 
-  --link-color: #297373;
+  --primary-color: #012b51;
+  --secondary-color: #fe5d26;
 }
 
 * {
@@ -20,7 +21,7 @@
 }
 
 a {
-  color: var(--link-color);
+  color: var(--primary-color);
 }
 
 body {
@@ -30,13 +31,61 @@ body {
   width: 100vw;
   height: 100vh;
 
-  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 80px 1fr;
+}
+
+.navigation {
+  grid-row: span 2;
+
+  padding: 32px;
+
+  background-color: #012b51;
+}
+
+.navigation__title {
+  font-weight: 700;
+  font-size: 1.8rem;
+
+  color: #fff;
+
+  margin-bottom: 32px;
+}
+
+.navigation__item {
+  padding: 16px 0;
+  font-size: 1.2rem;
+
+  border-bottom: 1px solid #ebebeb;
+}
+
+.navigation__item:last-child {
+  border-bottom: none;
+}
+
+.navigation__item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navigation__item:hover a {
+  color: #c2e2fe;
+}
+
+.app__header {
+  background-color: var(--box-background);
+  box-shadow: var(--box-shadow);
+}
+
+.app__content {
   padding: 16px;
 }
 
-@media (min-width: 1024px) {
-  body {
-    width: 70vw;
+@media (min-width: 1500px) {
+  .app__content {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 
@@ -50,11 +99,13 @@ body {
   padding: 16px;
 }
 
-.box__title {
+.app__title {
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 2rem;
 
   margin-bottom: 8px;
+
+  color: var(--primary-color);
 }
 
 .table-list {
@@ -79,7 +130,7 @@ body {
 }
 
 .table-list__body tr:hover {
-  background-color: #edede9;
+  background-color: #c2e2fe;
 }
 
 .ticket-field__title {
@@ -93,6 +144,6 @@ body {
 }
 
 .breadcumb {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   font-size: 0.8rem;
 }

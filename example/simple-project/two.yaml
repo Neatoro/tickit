@@ -1,0 +1,11 @@
+id: VT
+
+name: Vacation Trip
+
+tickettypes:
+  - name: Task
+    fields:
+      - id: description
+        name: Description
+        type: longtext
+        required: true

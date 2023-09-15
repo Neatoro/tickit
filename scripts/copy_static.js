@@ -35,6 +35,22 @@ fs.cpSync(
     { recursive: true }
 );
 
+fs.cpSync(
+    path.resolve(
+        process.cwd(),
+        'src',
+        'rendering',
+        'partials'
+    ),
+    path.resolve(
+        process.cwd(),
+        'dist',
+        'rendering',
+        'partials'
+    ),
+    { recursive: true }
+);
+
 const { devDependencies, scripts, ...rest } = packageJson;
 
 fs.writeFileSync(

@@ -51,12 +51,13 @@ export class TicketService {
     };
   }
 
-  async search() {
+  async search(filter?: { project }) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
 
     const result = await queryRunner.manager.find(TicketSchema, {
-      relations: ['fields']
+      relations: ['fields'],
+      where: filter
     });
 
     return result.map((ticket) => ({
