@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './entities';
 import subscribers from './subscribers';
 import { TicketModule } from '../ticket/ticket.module';
+import { ValidationModule } from '../validations/validation.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { TicketModule } from '../ticket/ticket.module';
       },
       inject: [ConfigService]
     }),
-    TicketModule
+    TicketModule,
+    ValidationModule
   ]
 })
 export class AppModule {}
