@@ -30,7 +30,8 @@ export class TicketController {
     return await this.ticketService.create({
       project: dto.project,
       summary: dto.summary,
-      fields: dto.fields
+      fields: dto.fields,
+      type: dto.type
     });
   }
 

@@ -6,11 +6,13 @@ export class Ticket {
       project?: string;
       summary?: string;
       fields?: FieldValues[];
+      type?: string;
     } = {}
   ) {
     this.project = args.project;
     this.summary = args.summary;
     this.fields = args.fields;
+    this.type = args.type;
   }
 
   id: number;
@@ -18,6 +20,8 @@ export class Ticket {
   project: string;
 
   summary: string;
+
+  type: string;
 
   fields: FieldValues[];
 }
@@ -37,6 +41,10 @@ export const TicketSchema = new EntitySchema<Ticket>({
       nullable: false
     },
     summary: {
+      type: String,
+      nullable: false
+    },
+    type: {
       type: String,
       nullable: false
     }
