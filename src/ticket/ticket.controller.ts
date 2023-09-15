@@ -21,6 +21,7 @@ export class TicketController {
     const validationResult = await this.validations
       .createValidation()
       .isValidProject(dto.project)
+      .isValidTicketType(dto.project, dto.type)
       .validate();
 
     if (!validationResult.result) {

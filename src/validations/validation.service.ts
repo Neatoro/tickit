@@ -13,7 +13,30 @@ class Validation {
         this.configService
           .get('projects')
           .filter((project) => project.id === projectId).length === 1,
-      error: `Invalid project ${projectId}`
+      error: `Invalid project "${projectId}"`
+    });
+
+    return this;
+  }
+
+  isValidTicketType(projectId: string, typeName: string): Validation {
+    this.validations.push({
+      validate: () => {
+        const project = this.configService
+          .get('projects')
+          .find((project) => project.id === projectId);
+
+        if (project) {
+          const tickettypes = project.tickettypes;
+
+          return (
+            tickettypes.filter((type) => type.name === typeName).length === 1
+          );
+        }
+
+        return false;
+      },
+      error: `Invalid type "${typeName}" in project "${projectId}"`
     });
 
     return this;

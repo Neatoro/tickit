@@ -2,7 +2,7 @@ id: STP
 
 name: Simple Test Project
 
-issuetypes:
+tickettypes:
   - name: Task
     fields:
       - id: description
