@@ -5,6 +5,10 @@
     <title>TickIT</title>
 
     <link href='/css/main.css' rel='stylesheet' />
+
+    <script>
+      window.context = {{{json this}}};
+    </script>
   </head>
   <body class="app">
     {{> navigation }}
@@ -14,7 +18,7 @@
     </main>
 
     {{#if js}}
-    <script src="/js/{{js}}"></script>
+    <script src="/js/{{js}}" type="module"></script>
     {{/if}}
   </body>
 </html>

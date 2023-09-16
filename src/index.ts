@@ -13,7 +13,9 @@ async function bootstrap() {
   app.useStaticAssets(resolve(__dirname, 'rendering', 'public'));
   app.setBaseViewsDir(resolve(__dirname, 'rendering', 'views'));
   app.setViewEngine('hbs');
+
   hbs.registerPartials(resolve(__dirname, 'rendering', 'partials'));
+  hbs.registerHelper('json', (object) => JSON.stringify(object));
 
   const configService = app.get(ConfigService);
   const port = configService.get('port') || 8000;
