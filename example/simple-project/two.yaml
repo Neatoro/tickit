@@ -27,6 +27,8 @@ tickettypes:
         transitions:
           - name: Reopen
             target: Open
+          - name: Close
+            target: Done
       - status: Done
         transitionFromAll: true
         transitions:

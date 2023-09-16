@@ -5,6 +5,7 @@
 @import 'components/badge.css';
 @import 'components/box.css';
 @import 'components/breadcumb.css';
+@import 'components/button.css';
 @import 'components/navigation.css';
 @import 'components/table-list.css';
 @import 'components/ticket-field.css';
@@ -78,4 +79,8 @@ body {
   stroke: currentColor;
   fill: currentColor;
   margin-right: 16px;
+}
+
+.action-bar {
+  margin-bottom: 16px;
 }
