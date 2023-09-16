@@ -34,3 +34,16 @@ tickettypes:
         transitions:
           - name: Reopen
             target: Open
+
+boards:
+  - name: Kanban Board
+    columns:
+      - name: Open
+        status:
+          - Open
+      - name: In Progress
+        status:
+          - In Progress
+      - name: Done
+        status:
+          - Done
