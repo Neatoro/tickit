@@ -1,5 +1,5 @@
 function createProxy(elements, object = window.context, parentKeys = []) {
-  const newObject = object.length ? [] : {};
+  const newObject = typeof object.length === 'number' ? [] : {};
 
   const keys = Object.keys(object);
   for (const key of keys) {

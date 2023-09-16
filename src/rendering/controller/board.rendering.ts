@@ -35,14 +35,21 @@ export class BoardRendering {
       project: projectId
     });
 
+    const transformedTickets = tickets.map((ticket) => ({
+      ...ticket,
+      type: project.tickettypes.find((type) => type.name === ticket.type)
+    }));
+
     board.columns = board.columns.map((column) => ({
       ...column,
-      tickets: tickets.filter((ticket) => column.status.includes(ticket.status))
+      tickets: transformedTickets.filter((ticket) =>
+        column.status.includes(ticket.status)
+      )
     }));
 
     return {
       project,
-      tickets,
+      tickets: transformedTickets,
       board
     };
   }
