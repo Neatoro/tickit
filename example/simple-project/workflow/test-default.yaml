@@ -1,0 +1,29 @@
+- status: Open
+  transitionFromAll: true
+  transitions:
+    - name: To Be Refined
+      target: To Be Refined
+    - name: Close
+      target: Done
+- status: To Be Refined
+  transitions:
+    - name: Set to Ready
+      target: Ready
+- status: In Progress
+  transitions:
+    - name: Decommit
+      target: Ready
+    - name: Start Review
+      target: In Review
+- status: In Review
+  transitions:
+    - name: Start Progress
+      target: In Progress
+    - name: Done
+      target: Done
+- status: Done
+  transitions:
+    - name: Restart
+      target: Ready
+- status: Archived
+  transitionFromAll: true

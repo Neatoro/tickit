@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon -e ts,hbs -w ./src -x ts-node src/index.ts --config=example/simple-project/config.yaml",
-    "prettify": "npx prettier -w src/**/*.ts src/**/*.css package.json .prettierrc tsconfig.json",
+    "prettify": "npx prettier -w src/**/*.ts example/**/*.yaml src/**/*.css package.json .prettierrc tsconfig.json",
     "build": "tsc && node scripts/copy_static.js"
   },
   "license": "ISC",

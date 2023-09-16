@@ -26,6 +26,7 @@ tickettypes:
         name: Description
         type: longtext
         required: true
+    workflow: workflow/test-default
   - name: Bug
     fields:
       - id: description
@@ -44,3 +45,4 @@ tickettypes:
         name: Expected Behavior
         type: longtext
         required: true
+    workflow: workflow/test-default

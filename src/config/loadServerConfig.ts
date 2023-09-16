@@ -28,6 +28,18 @@ async function loadProjects({ basePath, config }) {
       logger.log(`Loading project configuration ${path}`);
 
       const projectConfig = await loadYAML(path);
+
+      for (const tickettype of projectConfig.tickettypes) {
+        if (
+          typeof tickettype.workflow === 'string' ||
+          tickettype.workflow instanceof String
+        ) {
+          const workflowPath = resolve(basePath, tickettype.workflow + '.yaml');
+          logger.log(`Loading workflow configuration ${workflowPath}`);
+          tickettype.workflow = await loadYAML(workflowPath);
+        }
+      }
+
       projects.push(projectConfig);
     }
   }
