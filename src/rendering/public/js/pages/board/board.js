@@ -47,6 +47,8 @@ function startDrag(event) {
     domColumn.addEventListener('dragenter', onDragEnter);
     domColumn.addEventListener('dragleave', onDragLeave);
     domColumn.addEventListener('drop', onDrop);
+
+    domColumn.classList.add('kanban__column--movable');
   });
 
   currentlyDraggedElement = event.target;
@@ -59,15 +61,19 @@ function endDrag() {
     domColumn.removeEventListener('dragenter', onDragEnter);
     domColumn.removeEventListener('dragleave', onDragLeave);
     domColumn.removeEventListener('drop', onDrop);
+
+    domColumn.classList.remove('kanban__column--movable', 'hover');
   });
 }
 
 function onDragEnter(event) {
   event.preventDefault();
+  event.target.classList.add('hover');
 }
 
 function onDragLeave(event) {
   event.preventDefault();
+  event.target.classList.remove('hover');
 }
 
 function onDragOver(event) {
