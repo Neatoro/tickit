@@ -1,4 +1,4 @@
-{{#> layout}}
+{{#> layout js='pages/ticket/view.js'}}
 <p class='breadcumb'>
   <a href='/project'>Projects</a> >
   <a href='/project/{{project.id}}'>{{project.name}}</a> >
@@ -7,7 +7,7 @@
 <h1 class='app__title'>{{ticket.summary}}</h1>
 <div class="action-bar">
   {{#each ticket.transitions}}
-  <button class="button">{{name}}</button>
+  <button class="button js-transition-buttton" data-status="{{target}}">{{name}}</button>
   {{/each}}
 </div>
 <div class="box ticket-fields">

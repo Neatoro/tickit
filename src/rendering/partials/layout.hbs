@@ -12,5 +12,9 @@
     <main class="app__content">
         {{> @partial-block }}
     </main>
+
+    {{#if js}}
+    <script src="/js/{{js}}"></script>
+    {{/if}}
   </body>
 </html>

@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   ParseIntPipe,
-  Post
+  Post,
+  Put
 } from '@nestjs/common';
 import { TicketService } from './ticket.service';
 import { CreateTicketDTO, TransitionTicketDTO } from './ticket.interface';
@@ -46,7 +47,7 @@ export class TicketController {
     };
   }
 
-  @Post('/:projectId/:ticketId/transition')
+  @Put('/:projectId/:ticketId/transition')
   async transition(
     @Param('projectId') projectId: string,
     @Param('ticketId', ParseIntPipe) ticketId: number,
