@@ -5,10 +5,12 @@
   <a href='/ticket/{{project.id}}/{{ticket.id}}'>{{project.id}}-{{ticket.id}}</a>
 </p>
 <h1 class='app__title'>{{ticket.summary}}</h1>
-<div class='action-bar'>
-  {{#each ticket.transitions}}
-  <button class='button js-transition-buttton' data-status='{{target}}'>{{name}}</button>
-  {{/each}}
+<div class='action-bar' data-id='actionbar' data-bind>
+  <span id='transition-buttons'>
+    {{#each ticket.transitions}}
+    <button class='button js-transition-button' data-status='{{target}}'>{{name}}</button>
+    {{/each}}
+  </span>
 </div>
 <div class='box ticket-fields'>
   <section class='ticket-field'>
@@ -20,7 +22,7 @@
   <section class='ticket-field'>
     <h2 class='ticket-field__title'>Type</h2>
     <p class='ticket-field__value'>
-      {{ticket.type}}
+      {{ticket.type.name}}
     </p>
   </section>
   {{#each schema}}

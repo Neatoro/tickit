@@ -26,18 +26,19 @@ export class TicketRendering {
       (status) => status.name === ticket.status
     );
 
-    const { workflow = [] } = project.tickettypes.find(
+    const type = project.tickettypes.find(
       (type) => type.name === ticket.type
-    );
+    ) || { workflow: [] };
 
     const { transitions = {} } =
-      workflow.find(
+      type.workflow.find(
         (workflowElement) => workflowElement.status === ticket.status
       ) || {};
 
     return {
       ticket: {
         ...ticket,
+        type,
         status,
         transitions
       },
