@@ -6,6 +6,7 @@
 @import 'components/box.css';
 @import 'components/breadcumb.css';
 @import 'components/button.css';
+@import 'components/kanban.css';
 @import 'components/navigation.css';
 @import 'components/table-list.css';
 @import 'components/ticket-field.css';
@@ -49,10 +50,20 @@ body {
 .app__header {
   background-color: var(--box-background);
   box-shadow: var(--box-shadow);
+  z-index: 1;
 }
 
 .app__content {
   padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1500px) {
+  .app__content__container {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 .app__title {
@@ -62,13 +73,6 @@ body {
   margin-bottom: 16px;
 
   color: var(--primary-color);
-}
-
-@media (min-width: 1500px) {
-  .app__content {
-    width: 80%;
-    margin: 0 auto;
-  }
 }
 
 .icon {

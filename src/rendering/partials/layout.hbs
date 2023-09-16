@@ -14,7 +14,9 @@
     {{> navigation }}
     <header class="app__header"></header>
     <main class="app__content">
-        {{> @partial-block }}
+        <div class="app__content__container">
+          {{> @partial-block }}
+        </div>
     </main>
 
     {{#if js}}

@@ -1,0 +1,22 @@
+{{#> layout}}
+<p class='breadcumb'>
+  <a href='/board'>Boards</a> >
+  <a href='/board/{{project.id}}/{{board.name}}'>{{board.name}} ({{project.id}})</a>
+</p>
+<h1 class='app__title'>{{board.name}}</h1>
+  <div class="kanban">
+    {{#each board.columns}}
+    <div class="kanban__column">
+      <h2 class="kanban__column__title">{{name}}</h2>
+      {{#each tickets}}
+      <div class="card box">
+        <a href="/ticket/{{@root.project.id}}/{{id}}" class="card__link">{{@root.project.id}}-{{id}}</a>
+        <h3 class="card__title">{{summary}}</h3>
+      </div>
+      {{else}}
+      <p class="card card--empty box">Currently no Tickets</p>
+      {{/each}}
+    </div>
+    {{/each}}
+</div>
+{{/layout}}

@@ -36,7 +36,7 @@ tickettypes:
             target: Open
 
 boards:
-  - name: Kanban Board
+  - name: Project Board
     columns:
       - name: Open
         status:
