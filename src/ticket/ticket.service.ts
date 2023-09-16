@@ -88,4 +88,20 @@ export class TicketService {
       );
     }
   }
+
+  async transition(projectId: string, ticketId: number, newStatus: string) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+
+    const ticket: Ticket = await queryRunner.manager.findOne(TicketSchema, {
+      where: {
+        project: projectId,
+        id: ticketId
+      }
+    });
+
+    ticket.status = newStatus;
+
+    return await queryRunner.manager.save(ticket);
+  }
 }

@@ -3,10 +3,12 @@ import {
   Body,
   Controller,
   Get,
+  Param,
+  ParseIntPipe,
   Post
 } from '@nestjs/common';
 import { TicketService } from './ticket.service';
-import { CreateTicketDTO } from './ticket.interface';
+import { CreateTicketDTO, TransitionTicketDTO } from './ticket.interface';
 import { ValidationService } from '../validations/validation.service';
 
 @Controller('/api/ticket')
@@ -42,5 +44,27 @@ export class TicketController {
     return {
       data: await this.ticketService.search()
     };
+  }
+
+  @Post('/:projectId/:ticketId/transition')
+  async transition(
+    @Param('projectId') projectId: string,
+    @Param('ticketId', ParseIntPipe) ticketId: number,
+    @Body() dto: TransitionTicketDTO
+  ) {
+    const validationResult = await this.validations
+      .createValidation()
+      .isValidProject(projectId)
+      .validate();
+
+    if (!validationResult.result) {
+      throw new BadRequestException(validationResult.errors);
+    }
+
+    return await this.ticketService.transition(
+      projectId,
+      ticketId,
+      dto.newStatus
+    );
   }
 }

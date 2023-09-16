@@ -17,3 +17,9 @@ export class CreateTicketDTO {
   @IsString()
   type: string;
 }
+
+export class TransitionTicketDTO {
+  @IsNotEmpty()
+  @IsString()
+  newStatus: string;
+}
