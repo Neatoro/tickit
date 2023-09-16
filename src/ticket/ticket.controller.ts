@@ -52,13 +52,30 @@ export class TicketController {
     @Param('ticketId', ParseIntPipe) ticketId: number,
     @Body() dto: TransitionTicketDTO
   ) {
-    const validationResult = await this.validations
+    const projectValidationResult = await this.validations
       .createValidation()
       .isValidProject(projectId)
       .validate();
 
-    if (!validationResult.result) {
-      throw new BadRequestException(validationResult.errors);
+    if (!projectValidationResult.result) {
+      throw new BadRequestException(projectValidationResult.errors);
+    }
+
+    const ticket = await this.ticketService.get(projectId, ticketId);
+
+    const statusValidationResult = await this.validations
+      .createValidation()
+      .isValidStatus(projectId, ticket.type, dto.newStatus)
+      .canTransitionToStatus(
+        projectId,
+        ticket.type,
+        ticket.status,
+        dto.newStatus
+      )
+      .validate();
+
+    if (!statusValidationResult.result) {
+      throw new BadRequestException(statusValidationResult.errors);
     }
 
     return await this.ticketService.transition(

@@ -117,6 +117,81 @@ class Validation {
     });
   }
 
+  isValidStatus(
+    projectId: string,
+    typeName: string,
+    status: string
+  ): Validation {
+    this.validations.push({
+      validate: () => {
+        const project = this.configService
+          .get('projects')
+          .find((project) => project.id === projectId) || {
+          status: [],
+          tickettypes: []
+        };
+        const type =
+          project.tickettypes.find((type) => type.name === typeName) || {};
+
+        if (type.workflow) {
+          const validStatus = type.workflow.map(
+            (workflowElement) => workflowElement.status
+          );
+          return validStatus.includes(status);
+        } else {
+          return project.status.map((status) => status.name).includes(status);
+        }
+      },
+      error: `Invalid status "${status}"`
+    });
+
+    return this;
+  }
+
+  canTransitionToStatus(
+    projectId: string,
+    typeName: string,
+    sourceStatus: string,
+    targetStatus: string
+  ): Validation {
+    this.validations.push({
+      validate: () => {
+        if (sourceStatus === targetStatus) {
+          return true;
+        }
+
+        const project = this.configService
+          .get('projects')
+          .find((project) => project.id === projectId) || { tickettypes: [] };
+        const type =
+          project.tickettypes.find((type) => type.name === typeName) || {};
+
+        if (type.workflow) {
+          const targetWorkflowElement =
+            type.workflow.find(
+              (workflowElement) => workflowElement.status === targetStatus
+            ) || {};
+
+          if (targetWorkflowElement.transitionFromAll) {
+            return true;
+          }
+
+          const sourceWorkflowElement = type.workflow.find(
+            (workflowElement) => workflowElement.status === sourceStatus
+          );
+
+          return sourceWorkflowElement.transitions
+            .map((transition) => transition.target)
+            .includes(targetStatus);
+        }
+
+        return false;
+      },
+      error: `Cannot transition from status "${sourceStatus}" to "${targetStatus}"`
+    });
+    return this;
+  }
+
   async validate(): Promise<{ result: boolean; errors: string[] }> {
     const results = await Promise.all(
       this.validations.map(async (validation) => {
