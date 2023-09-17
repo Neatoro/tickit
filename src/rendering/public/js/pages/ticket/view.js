@@ -1,6 +1,6 @@
-import { setupBindingModule } from '../../common/binding.js';
+import { Store } from '../../common/store.js';
 
-const { elements, context } = setupBindingModule();
+const store = Store.initStore();
 
 const transitionButtons = document.querySelectorAll('.js-transition-button');
 
@@ -25,48 +25,47 @@ async function transitionTicket(event) {
   });
 
   if (response.status === 200) {
-    context.ticket.status = context.project.status.find(
+    store.state.ticket.status = store.state.project.status.find(
       (status) => status.name === newStatus
     );
   }
 }
 
-elements.status.addUpdate('ticket.status.type', function () {
-  const { ticket } = context;
+store.addBinding(
+  document.querySelector('#status'),
+  'ticket.status',
+  ({ node, state }) => {
+    const { ticket } = state;
+    const classes = ['badge', `badge-status-${ticket.status.type}`];
 
-  const defaultClasses = ['badge'];
-
-  const statusClass = `badge-status-${ticket.status.type}`;
-
-  this.dom.className = '';
-  this.dom.classList.add(...defaultClasses, statusClass);
-});
-
-elements.status.addUpdate('ticket.status.name', function () {
-  const { ticket } = context;
-
-  this.dom.innerText = ticket.status.name;
-});
-
-elements.actionbar.addUpdate('ticket.status', function () {
-  const { ticket } = context;
-
-  const { transitions } = ticket.type.workflow.find(
-    (workflowElement) => workflowElement.status === ticket.status.name
-  );
-
-  const container = document.createElement('span');
-  container.id = 'transition-buttons';
-
-  for (const transition of transitions) {
-    const button = document.createElement('button');
-    button.classList.add('button');
-    button.setAttribute('data-status', transition.target);
-    button.innerText = transition.name;
-    button.addEventListener('click', transitionTicket);
-
-    container.appendChild(button);
+    node.className = classes.join(' ');
+    node.innerText = ticket.status.name;
   }
+);
 
-  this.dom.querySelector('#transition-buttons').replaceWith(container);
-});
+store.addBinding(
+  document.querySelector('#actionbar'),
+  'ticket.status',
+  ({ node, state }) => {
+    const { ticket } = state;
+
+    const { transitions } = ticket.type.workflow.find(
+      (workflowElement) => workflowElement.status === ticket.status.name
+    );
+
+    const container = document.createElement('span');
+    container.id = 'transition-buttons';
+
+    for (const transition of transitions) {
+      const button = document.createElement('button');
+      button.classList.add('button');
+      button.setAttribute('data-status', transition.target);
+      button.innerText = transition.name;
+      button.addEventListener('click', transitionTicket);
+
+      container.appendChild(button);
+    }
+
+    node.querySelector('#transition-buttons').replaceWith(container);
+  }
+);
