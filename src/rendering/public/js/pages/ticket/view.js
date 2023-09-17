@@ -1,3 +1,4 @@
+import { h } from '../../common/render.js';
 import { Store } from '../../common/store.js';
 
 const store = Store.initStore();
@@ -53,18 +54,18 @@ store.addBinding(
       (workflowElement) => workflowElement.status === ticket.status.name
     );
 
-    const container = document.createElement('span');
-    container.id = 'transition-buttons';
+    const container = h(
+      'span',
+      { id: 'transition-buttons'},
+      transitions.map((transition) => h(
+        'button',
+        { class: 'button', 'data-status': transition.target },
+        [transition.name]
+      ))
+    );
 
-    for (const transition of transitions) {
-      const button = document.createElement('button');
-      button.classList.add('button');
-      button.setAttribute('data-status', transition.target);
-      button.innerText = transition.name;
-      button.addEventListener('click', transitionTicket);
-
-      container.appendChild(button);
-    }
+    [...container.querySelectorAll('.button')]
+        .forEach((button) => button.addEventListener('click', transitionTicket));
 
     node.querySelector('#transition-buttons').replaceWith(container);
   }
