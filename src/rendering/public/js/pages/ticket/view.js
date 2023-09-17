@@ -1,5 +1,6 @@
 import { h } from '../../common/render.js';
 import { Store } from '../../common/store.js';
+import { getPossibleTransitions } from '../../common/transitions.js';
 
 const store = Store.initStore();
 
@@ -50,22 +51,21 @@ store.addBinding(
   ({ node, state }) => {
     const { ticket } = state;
 
-    const { transitions } = ticket.type.workflow.find(
-      (workflowElement) => workflowElement.status === ticket.status.name
-    );
+    const transitions = getPossibleTransitions(ticket);
 
     const container = h(
       'span',
-      { id: 'transition-buttons'},
-      transitions.map((transition) => h(
-        'button',
-        { class: 'button', 'data-status': transition.target },
-        [transition.name]
-      ))
+      { id: 'transition-buttons' },
+      transitions.map((transition) =>
+        h('button', { class: 'button', 'data-status': transition.target }, [
+          transition.name
+        ])
+      )
     );
 
-    [...container.querySelectorAll('.button')]
-        .forEach((button) => button.addEventListener('click', transitionTicket));
+    [...container.querySelectorAll('.button')].forEach((button) =>
+      button.addEventListener('click', transitionTicket)
+    );
 
     node.querySelector('#transition-buttons').replaceWith(container);
   }

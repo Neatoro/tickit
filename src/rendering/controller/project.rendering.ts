@@ -30,11 +30,7 @@ export class ProjectRendering {
 
     return {
       project,
-      tickets: tickets.map((ticket) => ({
-        ...ticket,
-        project,
-        status: project.status.find((status) => status.name === ticket.status)
-      }))
+      tickets
     };
   }
 }

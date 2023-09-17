@@ -5,6 +5,7 @@ import { TicketController } from './ticket.controller';
 import { TicketService } from './ticket.service';
 import { ValidationModule } from '../validations/validation.module';
 import { TicketSubscriber } from './ticket.subscriber';
+import { TicketTransformer } from './ticket.transformer';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { TicketSubscriber } from './ticket.subscriber';
     ValidationModule
   ],
   controllers: [TicketController],
-  providers: [TicketService, TicketSubscriber],
+  providers: [TicketService, TicketSubscriber, TicketTransformer],
   exports: [TicketService]
 })
 export class TicketModule {}

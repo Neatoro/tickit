@@ -7,7 +7,7 @@
 <h1 class='app__title'>{{ticket.summary}}</h1>
 <div class='action-bar' id='actionbar'>
   <span id='transition-buttons'>
-    {{#each ticket.transitions}}
+    {{#each possibleTransitions}}
     <button class='button js-transition-button' data-status='{{target}}'>{{name}}</button>
     {{/each}}
   </span>

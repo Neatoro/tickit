@@ -1,5 +1,6 @@
 import { h } from '../../common/render.js';
 import { Store } from '../../common/store.js';
+import { getPossibleTransitions } from '../../common/transitions.js';
 
 const store = Store.initStore();
 
@@ -9,9 +10,7 @@ function calculateMovableColumns(ticketId) {
   const { columns } = store.state.board;
 
   const ticket = store.state.tickets.find((ticket) => ticket.id === ticketId);
-  const { transitions } = ticket.type.workflow.find(
-    (workflow) => workflow.status === ticket.status
-  );
+  const transitions = getPossibleTransitions(ticket);
 
   const movableStatus = transitions.map((transition) => transition.target);
 
@@ -109,7 +108,9 @@ async function onDrop(event) {
 
   if (response.status === 200) {
     const ticket = store.state.tickets.find((ticket) => ticket.id === ticketId);
-    ticket.status = newStatus;
+    ticket.status = store.state.project.status.find(
+      (status) => status.name === newStatus
+    );
 
     oldColumn.tickets = oldColumn.tickets.filter(
       (ticket) => ticket.id !== ticketId

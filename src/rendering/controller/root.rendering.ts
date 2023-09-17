@@ -22,8 +22,7 @@ export class RootRendering {
 
         return {
           ...ticket,
-          project,
-          status: project.status.find((status) => status.name === ticket.status)
+          project
         };
       })
     };

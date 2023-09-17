@@ -69,8 +69,8 @@ export class TicketController {
       .isValidStatus(projectId, ticket.type, dto.newStatus)
       .canTransitionToStatus(
         projectId,
-        ticket.type,
-        ticket.status,
+        ticket.type.name,
+        ticket.status.name,
         dto.newStatus
       )
       .validate();

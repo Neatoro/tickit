@@ -3,12 +3,14 @@ import { FieldValues, Ticket, TicketSchema } from './ticket.entities';
 import { CreateTicketDTO } from './ticket.interface';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { TicketTransformer } from './ticket.transformer';
 
 @Injectable()
 export class TicketService {
   constructor(
     private readonly dataSource: DataSource,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
+    private readonly ticketTransformer: TicketTransformer
   ) {}
 
   async create(dto: CreateTicketDTO) {
@@ -27,7 +29,9 @@ export class TicketService {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
 
-    return await queryRunner.manager.save(ticket);
+    const savedTicket = await queryRunner.manager.save(ticket);
+
+    return this.ticketTransformer.transformToFullTicket(savedTicket);
   }
 
   async get(projectId: string, id: number) {
@@ -42,13 +46,7 @@ export class TicketService {
       }
     });
 
-    return {
-      ...ticket,
-      fields: ticket.fields.reduce(
-        (fields, field) => ({ ...fields, [field.field]: field.value }),
-        {}
-      )
-    };
+    return this.ticketTransformer.transformToFullTicket(ticket);
   }
 
   async search(filter?: { project }) {
@@ -60,13 +58,9 @@ export class TicketService {
       where: filter
     });
 
-    return result.map((ticket) => ({
-      ...ticket,
-      fields: ticket.fields.reduce(
-        (fields, field) => ({ ...fields, [field.field]: field.value }),
-        {}
-      )
-    }));
+    return result.map((ticket) =>
+      this.ticketTransformer.transformToFullTicket(ticket)
+    );
   }
 
   getSchema(projectId: string, typeName: string) {
