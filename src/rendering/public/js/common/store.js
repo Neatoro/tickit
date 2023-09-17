@@ -19,7 +19,7 @@ class ReactiveObject {
           ]);
           result = Reflect.set(object, prop, newReactiveObject);
         } else {
-          result = Reflect.set(...arguments);
+          result = Reflect.set(object, prop, value);
         }
 
         if (result) {
