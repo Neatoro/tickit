@@ -6,6 +6,7 @@ module.exports = function request({ method, url, data = {} }) {
   return axios({
     method,
     url: `${baseUrl}${url}`,
-    data
+    data,
+    validateStatus: false
   });
 };
