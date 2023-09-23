@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  NotFoundException,
   Param,
   ParseIntPipe,
   Post,
@@ -63,6 +64,12 @@ export class TicketController {
     }
 
     const ticket = await this.ticketService.get(projectId, ticketId);
+
+    if (!ticket) {
+      throw new NotFoundException([
+        `Ticket ${projectId}-${ticketId} not found`
+      ]);
+    }
 
     const statusValidationResult = await this.validations
       .createValidation()

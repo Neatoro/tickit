@@ -46,7 +46,9 @@ export class TicketService {
       }
     });
 
-    return this.ticketTransformer.transformToFullTicket(ticket);
+    return ticket
+      ? this.ticketTransformer.transformToFullTicket(ticket)
+      : undefined;
   }
 
   async search(filter?: { project }) {

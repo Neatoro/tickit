@@ -87,5 +87,21 @@ describe('Ticket - Transition', () => {
         message: ['Cannot transition from status "Done" to "In Progress"']
       });
     });
+
+    it('should fail if ticket does not exist', async () => {
+      const response = await request({
+        method: 'put',
+        url: '/api/ticket/VT/0/transition',
+        data: {
+          newStatus: 'In Progress'
+        }
+      });
+
+      expect(response.data).toEqual({
+        error: 'Not Found',
+        statusCode: 404,
+        message: ['Ticket VT-0 not found']
+      });
+    });
   });
 });
