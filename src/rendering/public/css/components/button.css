@@ -14,6 +14,14 @@
   color: #fff;
 }
 
+.button--confirm {
+  background-color: var(--green);
+}
+
+.button--abort {
+  background-color: var(--red);
+}
+
 #transition-buttons .button {
   margin-right: 8px;
 }
