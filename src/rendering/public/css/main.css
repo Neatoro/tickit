@@ -2,10 +2,13 @@
 
 @import 'reset.css';
 
+@import 'components/action-bar.css';
 @import 'components/badge.css';
 @import 'components/box.css';
 @import 'components/breadcumb.css';
 @import 'components/button.css';
+@import 'components/dialog.css';
+@import 'components/form.css';
 @import 'components/kanban.css';
 @import 'components/navigation.css';
 @import 'components/table-list.css';
@@ -25,6 +28,8 @@
   --secondary-color: #fe5d26;
 
   --green: #2fbf71;
+
+  --input-border: 1px solid #777;
 }
 
 * {
@@ -87,4 +92,16 @@ body {
 
 .action-bar {
   margin-bottom: 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

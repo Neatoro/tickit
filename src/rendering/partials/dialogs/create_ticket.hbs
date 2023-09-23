@@ -1,0 +1,37 @@
+<dialog class="dialog" id="createTicketDialog">
+  <header class="dialog__header">
+    <h2 class="dialog__title">Create Ticket</h2>
+    <button class="dialog__close">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="/icons/icons.svg#icon-clear" />
+      </svg>
+      <span class="sr-only">Close Dialog</span>
+    </button>
+  </header>
+  <form method="dialog">
+    <fieldset class="fieldset">
+      <legend class="fieldset__legend">General</legend>
+      <div class="field">
+        <label class="field__label" for="type">Ticket Type</label>
+        <div class="select">
+          <select class="field__value" required id="type">
+            {{#each project.tickettypes}}
+            <option>{{name}}</option>
+            {{/each}}
+          </select>
+          <svg class="icon"><use xlink:href="/icons/icons.svg#icon-keyboard_arrow_down"></use></svg>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="summary">Summary</label>
+        <input type="text" required class="input field__value" id="summary" />
+      </div>
+    </fieldset>
+
+    <div>
+      <button class="button button--abort" value="cancel" formmethod="dialog">Cancel</button>
+      <button class="button button--confirm">Create</button>
+    </div>
+  </form>
+</dialog>
+<script src="/js/dialogs/create-ticket.js"></script>

@@ -12,5 +12,11 @@
         <symbol id="icon-home" viewBox="0 0 24 24">
             <path d="M9.984 20.016H5.015V12h-3l9.984-9 9.984 9h-3v8.016h-4.969v-6H9.983v6z" />
         </symbol>
+        <symbol id="icon-clear" viewBox="0 0 24 24">
+            <path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+        </symbol>
+        <symbol id="icon-keyboard_arrow_down" viewBox="0 0 24 24">
+            <path d="M7.406 8.578l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z"></path>
+        </symbol>
     </defs>
 </svg>
