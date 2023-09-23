@@ -1,0 +1,8 @@
+port: 5000
+
+database:
+  type: sqlite
+  database: test/api/test.db
+
+projects:
+  - api-test
