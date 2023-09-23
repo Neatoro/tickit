@@ -3,10 +3,10 @@ import { h } from '../common/render.js';
 
 const store = Store.initStore();
 
-class DialogConfirmEvent extends Event {
-  constructor(fields) {
-    super('confirm');
-    this.fields = fields;
+class TicketCreatedEvent extends Event {
+  constructor(ticket) {
+    super('success');
+    this.ticket = ticket;
   }
 }
 
@@ -98,7 +98,7 @@ async function renderTypeFields(project, type) {
   });
 
   const confirmButton = dialog.querySelector('.button--confirm');
-  confirmButton.addEventListener('click', (event) => {
+  confirmButton.addEventListener('click', async (event) => {
     event.preventDefault();
     if (form.checkValidity()) {
       const fields = [...dialog.querySelectorAll('form .field__value')].reduce(
@@ -106,7 +106,23 @@ async function renderTypeFields(project, type) {
         {}
       );
 
-      dialog.dispatchEvent(new DialogConfirmEvent(fields));
+      const { summary, type, ...rest } = fields;
+      const response = await fetch('/api/ticket', {
+        method: 'post',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          summary,
+          type,
+          project: store.state.project.id,
+          fields: rest
+        })
+      });
+
+      const ticket = await response.json();
+
+      dialog.dispatchEvent(new TicketCreatedEvent(ticket));
       dialog.close();
     } else {
       form.reportValidity();

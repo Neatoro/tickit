@@ -22,7 +22,7 @@
 .input {
   width: 100%;
   min-width: 15ch;
-  max-width: 30ch;
+  max-width: 60ch;
   border: var(--input-border);
   border-radius: 4px;
   cursor: pointer;
