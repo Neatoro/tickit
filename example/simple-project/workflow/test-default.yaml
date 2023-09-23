@@ -9,6 +9,12 @@
   transitions:
     - name: Set to Ready
       target: Ready
+- status: Ready
+  transitions:
+    - name: Reopen
+      target: Open
+    - name: Start Progress
+      target: In Progress
 - status: In Progress
   transitions:
     - name: Decommit

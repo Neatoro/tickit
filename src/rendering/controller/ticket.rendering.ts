@@ -10,9 +10,11 @@ export class TicketRendering {
   ) {}
 
   getPossibleTransitions(ticket) {
-    const { transitions } = ticket.type.workflow.find(
-      (workflowElement) => workflowElement.status === ticket.status.name
-    );
+    const workflow = ticket.type.workflow || [];
+    const { transitions = [] } =
+      workflow.find(
+        (workflowElement) => workflowElement.status === ticket.status.name
+      ) || {};
 
     const alwaysTransitions = ticket.type.workflow
       .filter((workflowElement) => workflowElement.transitionFromAll)
