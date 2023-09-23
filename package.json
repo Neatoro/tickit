@@ -6,7 +6,7 @@
     "dev": "nodemon -e ts,hbs,yaml -w ./example -w ./src -x ts-node src/index.ts --config=example/simple-project/config.yaml",
     "prettify": "npx prettier -w src/**/*.ts src/**/*.js test/**/*.js example/**/*.yaml src/**/*.css package.json .prettierrc tsconfig.json",
     "build": "tsc && node scripts/copy_static.js",
-    "test:api": "node test/api/jasmine.js"
+    "test:api": "npm run build && node test/api/jasmine.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.6.0",
+    "axios": "^1.5.0",
     "jasmine": "^5.1.0",
     "jasmine-console-reporter": "^3.1.0",
     "nodemon": "^3.0.1",

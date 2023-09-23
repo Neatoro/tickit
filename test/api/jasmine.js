@@ -34,6 +34,6 @@ jasmine.addReporter(reporter);
     'test/api/configuration/config.yaml',
     5000
   );
-  jasmine.execute();
+  await jasmine.execute();
   server.kill();
 })();
