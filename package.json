@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon -e ts,hbs,yaml -w ./example -w ./src -x ts-node src/index.ts --config=example/simple-project/config.yaml",
-    "prettify": "npx prettier -w src/**/*.ts src/**/*.js test/**/*.js example/**/*.yaml src/**/*.css .github/**/*.yaml package.json .prettierrc tsconfig.json",
+    "prettify": "prettier -w .",
     "build": "tsc && node scripts/copy_static.js",
     "test:api": "npm run build && npm run test:api:ci",
     "test:api:ci": "node test/api/jasmine.js"

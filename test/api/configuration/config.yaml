@@ -5,4 +5,5 @@ database:
   database: test/api/test.db
 
 projects:
-  - api-test
+  - vacation-project
+  - project-two

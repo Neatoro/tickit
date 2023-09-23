@@ -4,56 +4,26 @@ const path = require('path');
 const packageJson = require('../package.json');
 
 fs.cpSync(
-    path.resolve(
-        process.cwd(),
-        'src',
-        'rendering',
-        'public'
-    ),
-    path.resolve(
-        process.cwd(),
-        'dist',
-        'rendering',
-        'public'
-    ),
-    { recursive: true }
+  path.resolve(process.cwd(), 'src', 'rendering', 'public'),
+  path.resolve(process.cwd(), 'dist', 'rendering', 'public'),
+  { recursive: true }
 );
 
 fs.cpSync(
-    path.resolve(
-        process.cwd(),
-        'src',
-        'rendering',
-        'views'
-    ),
-    path.resolve(
-        process.cwd(),
-        'dist',
-        'rendering',
-        'views'
-    ),
-    { recursive: true }
+  path.resolve(process.cwd(), 'src', 'rendering', 'views'),
+  path.resolve(process.cwd(), 'dist', 'rendering', 'views'),
+  { recursive: true }
 );
 
 fs.cpSync(
-    path.resolve(
-        process.cwd(),
-        'src',
-        'rendering',
-        'partials'
-    ),
-    path.resolve(
-        process.cwd(),
-        'dist',
-        'rendering',
-        'partials'
-    ),
-    { recursive: true }
+  path.resolve(process.cwd(), 'src', 'rendering', 'partials'),
+  path.resolve(process.cwd(), 'dist', 'rendering', 'partials'),
+  { recursive: true }
 );
 
 const { devDependencies, scripts, ...rest } = packageJson;
 
 fs.writeFileSync(
-    path.resolve(process.cwd(), 'dist', 'package.json'),
-    JSON.stringify({ ...rest, main: 'index.js' }, null, 2)
+  path.resolve(process.cwd(), 'dist', 'package.json'),
+  JSON.stringify({ ...rest, main: 'index.js' }, null, 2)
 );

@@ -1,0 +1,41 @@
+{
+  "name": "Task",
+  "fields": [
+    {
+      "id": "description",
+      "name": "Description",
+      "type": "longtext",
+      "required": true
+    }
+  ],
+  "workflow": [
+    {
+      "status": "Open",
+      "transitions": [
+        {
+          "name": "Start Progress",
+          "target": "In Progress"
+        }
+      ]
+    },
+    {
+      "status": "In Progress",
+      "transitions": [
+        {
+          "name": "Reopen",
+          "target": "Open"
+        }
+      ]
+    },
+    {
+      "status": "Done",
+      "transitionFromAll": true,
+      "transitions": [
+        {
+          "name": "Reopen",
+          "target": "Open"
+        }
+      ]
+    }
+  ]
+}

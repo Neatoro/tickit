@@ -1,0 +1,21 @@
+{
+  "name": "Task",
+  "fields": [
+    {
+      "id": "description",
+      "name": "Description",
+      "type": "longtext",
+      "required": true
+    }
+  ],
+  "workflow": [
+    {
+      "status": "Open",
+      "transitionFromAll": true
+    },
+    {
+      "status": "Done",
+      "transitionFromAll": true
+    }
+  ]
+}
