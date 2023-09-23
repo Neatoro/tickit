@@ -27,11 +27,13 @@
         <input type="text" required class="input field__value" id="summary" />
       </div>
     </fieldset>
-
+    <fieldset class="fieldset" id="fields">
+      <legend class="fieldset__legend">Type-specific Fields</legend>
+    </fieldset>
     <div>
       <button class="button button--abort" value="cancel" formmethod="dialog">Cancel</button>
       <button class="button button--confirm">Create</button>
     </div>
   </form>
 </dialog>
-<script src="/js/dialogs/create-ticket.js"></script>
+<script src="/js/dialogs/create-ticket.js" type="module"></script>

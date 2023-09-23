@@ -30,6 +30,11 @@
   font-size: 1rem;
 }
 
+.textarea {
+  resize: none;
+  font-family: inherit;
+}
+
 .select:has(select:focus),
 .input:focus {
   border: 1px solid var(--secondary-color);
