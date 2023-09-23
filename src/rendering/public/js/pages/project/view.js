@@ -12,7 +12,7 @@ createTicketButton.addEventListener('click', (event) => {
 });
 
 createTicketDialog.addEventListener('success', (event) => {
-  store.state.tickets.push(event.ticket);
+  store.state.tickets = [...store.state.tickets, event.ticket];
 });
 
 store.addBinding(
