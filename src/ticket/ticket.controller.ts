@@ -48,6 +48,26 @@ export class TicketController {
     };
   }
 
+  @Get('/:projectId/:type')
+  async getSchema(
+    @Param('projectId') projectId: string,
+    @Param('type') type: string
+  ) {
+    const validationResult = await this.validations
+      .createValidation()
+      .isValidProject(projectId)
+      .isValidTicketType(projectId, type)
+      .validate();
+
+    if (!validationResult.result) {
+      throw new BadRequestException(validationResult.errors);
+    }
+
+    return {
+      fields: this.ticketService.getSchema(projectId, type)
+    };
+  }
+
   @Put('/:projectId/:ticketId/transition')
   async transition(
     @Param('projectId') projectId: string,
