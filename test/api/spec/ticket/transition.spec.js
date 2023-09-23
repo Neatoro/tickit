@@ -103,5 +103,56 @@ describe('Ticket - Transition', () => {
         message: ['Ticket VT-0 not found']
       });
     });
+
+    it('should fail if project does not exist', async () => {
+      const response = await request({
+        method: 'put',
+        url: '/api/ticket/BLA/1/transition',
+        data: {
+          newStatus: 'In Progress'
+        }
+      });
+
+      expect(response.data).toEqual({
+        error: 'Bad Request',
+        statusCode: 400,
+        message: ['Invalid project "BLA"']
+      });
+    });
+
+    it('should fail if ticket id is not a number', async () => {
+      const response = await request({
+        method: 'put',
+        url: '/api/ticket/VT/foo/transition',
+        data: {
+          newStatus: 'In Progress'
+        }
+      });
+
+      expect(response.data).toEqual({
+        error: 'Bad Request',
+        statusCode: 400,
+        message: 'Validation failed (numeric string is expected)'
+      });
+    });
+
+    it('should fail if there is no transition configured', async () => {
+      const response = await request({
+        method: 'put',
+        url: '/api/ticket/TWO/1/transition',
+        data: {
+          newStatus: 'In Progress'
+        }
+      });
+
+      expect(response.data).toEqual({
+        error: 'Bad Request',
+        statusCode: 400,
+        message: [
+          'Invalid status "In Progress"',
+          'Cannot transition from status "Open" to "In Progress"'
+        ]
+      });
+    });
   });
 });

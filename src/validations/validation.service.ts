@@ -176,11 +176,11 @@ class Validation {
             return true;
           }
 
-          const sourceWorkflowElement = type.workflow.find(
+          const { transitions = [] } = type.workflow.find(
             (workflowElement) => workflowElement.status === sourceStatus
           );
 
-          return sourceWorkflowElement.transitions
+          return transitions
             .map((transition) => transition.target)
             .includes(targetStatus);
         }
