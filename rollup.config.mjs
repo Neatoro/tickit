@@ -1,6 +1,7 @@
 import { readdirSync, lstatSync } from 'fs';
 import { join, sep } from 'path';
 import copy from 'rollup-plugin-copy';
+import terser from '@rollup/plugin-terser';
 
 function collectInputFiles(
   basePath = `src${sep}rendering${sep}public${sep}js${sep}pages`
@@ -31,11 +32,10 @@ export default {
   input,
   output: {
     dir: 'dist/rendering/public/js',
-    format: 'es',
-    manualChunks: {},
-    compact: true
+    format: 'es'
   },
   plugins: [
+    terser(),
     copy({
       targets: [
         { src: 'src/rendering/views', dest: 'dist/rendering' },
