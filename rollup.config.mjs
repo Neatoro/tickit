@@ -26,7 +26,6 @@ function collectInputFiles(
 }
 
 const input = collectInputFiles();
-console.log(input);
 
 export default {
   input,
