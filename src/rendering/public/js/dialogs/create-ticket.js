@@ -1,5 +1,5 @@
 import { Store } from '../common/store.js';
-import { h } from '../common/render.js';
+import { h, createIcon } from '../common/render.js';
 
 const store = Store.initStore();
 
@@ -15,9 +15,24 @@ const inputGenerators = {
     return h('textarea', {
       id: field.id,
       required: field.required,
-      class: 'input textarea',
+      class: 'input textarea field__value',
       rows: 5
     });
+  },
+  select(field) {
+    return h('div', { class: 'select' }, [
+      h(
+        'select',
+        {
+          id: field.id,
+          required: true,
+          value: field.default,
+          class: 'field__value'
+        },
+        field.values.map((value) => h('option', {}, [value]))
+      ),
+      createIcon('icon-keyboard_arrow_down')
+    ]);
   }
 };
 
@@ -34,7 +49,6 @@ async function generateTypeFields(project, type) {
 
   return fields.map((field) => {
     const input = inputGenerators[field.type](field);
-    input.classList.add('field__value');
     return h(
       'div',
       {

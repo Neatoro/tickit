@@ -3,7 +3,8 @@ import { ConfigService } from '@nestjs/config';
 
 const fieldValueValidators = {
   default: () => false,
-  longtext: (value) => typeof value === 'string' || value instanceof String
+  longtext: (value) => typeof value === 'string' || value instanceof String,
+  select: (value, field) => field.values.includes(value)
 };
 
 class Validation {
@@ -93,7 +94,7 @@ class Validation {
 
         return (
           (!configField.required || !!field.value) &&
-          fieldValueValidators[configField.type](field.value)
+          fieldValueValidators[configField.type](field.value, configField)
         );
       },
       error: `Invalid field value for "${field.field}" (${field.value})`

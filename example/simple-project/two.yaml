@@ -18,6 +18,16 @@ tickettypes:
         name: Description
         type: longtext
         required: true
+      - id: priority
+        name: Priority
+        type: select
+        required: true
+        default: Medium
+        values:
+          - Very High
+          - High
+          - Medium
+          - Low
     workflow:
       - status: Open
         transitions:
