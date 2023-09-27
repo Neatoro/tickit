@@ -3,29 +3,30 @@ import { join, sep } from 'path';
 import copy from 'rollup-plugin-copy';
 import terser from '@rollup/plugin-terser';
 
-function collectInputFiles(
-  basePath = `src${sep}rendering${sep}public${sep}js${sep}pages`
-) {
-  const files = readdirSync(basePath);
-  return files.reduce((acc, file) => {
-    const filePath = join(basePath, file);
-    if (lstatSync(filePath).isDirectory()) {
+const jsBasePath = join('src', 'rendering', 'public', 'js');
+
+function collectInputFiles(filePath) {
+  if (lstatSync(filePath).isDirectory()) {
+    const files = readdirSync(filePath);
+    return files.reduce((acc, file) => {
+      const inputFiles = collectInputFiles(join(filePath, file));
       return {
         ...acc,
-        ...collectInputFiles(filePath)
+        ...inputFiles
       };
-    } else {
-      return {
-        ...acc,
-        [filePath
-          .replace(`src${sep}rendering${sep}public${sep}js${sep}`, '')
-          .replace('.js', '')]: filePath
-      };
-    }
-  }, {});
+    }, {});
+  } else {
+    return {
+      [filePath.replace(jsBasePath, '').replace('.js', '').substring(1)]:
+        filePath
+    };
+  }
 }
 
-const input = collectInputFiles();
+const input = {
+  ...collectInputFiles(join(jsBasePath, 'pages')),
+  ...collectInputFiles(join(jsBasePath, 'dialogs'))
+};
 
 export default {
   input,
