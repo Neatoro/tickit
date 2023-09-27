@@ -6,6 +6,7 @@ import entities from './entities';
 import { TicketModule } from '../ticket/ticket.module';
 import { ValidationModule } from '../validations/validation.module';
 import { RenderingModule } from '../rendering/rendering.module';
+import { ProjectModule } from '../project/project.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { RenderingModule } from '../rendering/rendering.module';
       inject: [ConfigService]
     }),
     TicketModule,
+    ProjectModule,
     ValidationModule,
     RenderingModule
   ]
