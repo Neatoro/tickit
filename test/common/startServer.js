@@ -27,7 +27,7 @@ module.exports = async function startServer(context, config, port) {
   const stdoutStream = fs.createWriteStream(outPath);
   const stderrStream = fs.createWriteStream(errPath);
 
-  const server = spawn('node', ['dist/index.js', '--config=' + config], {
+  const server = spawn('bin/ticket-system', ['--config=' + config], {
     cwd: process.cwd()
   });
 
