@@ -50,4 +50,6 @@ jobs:
             name: executable
             path: bin
 
+      - run: ls
+      - run: ls bin
       - run: npm run test:api:ci
