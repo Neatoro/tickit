@@ -47,9 +47,8 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-            name: executable
-            path: bin
+          name: executable
+          path: bin
 
-      - run: ls
-      - run: ls bin
+      - run: chmod +x bin/ticket-system
       - run: npm run test:api:ci
