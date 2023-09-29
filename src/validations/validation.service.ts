@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 const fieldValueValidators = {
   default: () => false,
   longtext: (value) => typeof value === 'string' || value instanceof String,
+  text: (value) => typeof value === 'string' || value instanceof String,
   select: (value, field) => field.values.includes(value)
 };
 
@@ -101,16 +102,17 @@ class Validation {
     });
   }
 
-  private hasAllRequiredFields(validFields, fields) {
+  private hasAllRequiredFields(typeFields, fields) {
+    const requiredFields = typeFields.filter((field) => field.required);
     this.validations.push({
       validate: () => {
         const providedFieldIds = fields.map((field) => field.field);
 
-        return validFields
-          .map((validField) => validField.id)
+        return requiredFields
+          .map((requiredField) => requiredField.id)
           .reduce(
-            (acc, validFieldId) =>
-              acc && providedFieldIds.includes(validFieldId),
+            (acc, requiredFieldId) =>
+              acc && providedFieldIds.includes(requiredFieldId),
             true
           );
       },

@@ -19,6 +19,14 @@ const inputGenerators = {
       rows: 5
     });
   },
+  text(field) {
+    return h('input', {
+      type: 'text',
+      id: field.id,
+      required: field.required,
+      class: 'input field__value'
+    });
+  },
   select(field) {
     return h('div', { class: 'select' }, [
       h(
@@ -115,10 +123,12 @@ async function renderTypeFields(project, type) {
   confirmButton.addEventListener('click', async (event) => {
     event.preventDefault();
     if (form.checkValidity()) {
-      const fields = [...dialog.querySelectorAll('form .field__value')].reduce(
-        (acc, input) => ({ ...acc, [input.getAttribute('id')]: input.value }),
-        {}
-      );
+      const fields = [...dialog.querySelectorAll('form .field__value')]
+        .filter((input) => input.value)
+        .reduce(
+          (acc, input) => ({ ...acc, [input.getAttribute('id')]: input.value }),
+          {}
+        );
 
       const { summary, type, ...rest } = fields;
       const response = await fetch('/api/ticket', {

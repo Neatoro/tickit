@@ -28,6 +28,10 @@ tickettypes:
           - High
           - Medium
           - Low
+      - id: link
+        name: Link
+        type: text
+        required: false
     workflow:
       - status: Open
         transitions:
