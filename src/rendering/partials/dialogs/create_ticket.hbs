@@ -12,6 +12,17 @@
     <fieldset class="fieldset">
       <legend class="fieldset__legend">General</legend>
       <div class="field">
+        <label class="field__label" for="project">Project</label>
+        <div class="select">
+          <select class="field__value" data-ignore required id="project">
+            {{#each projects}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select>
+          <svg class="icon"><use xlink:href="/icons/icons.svg#icon-keyboard_arrow_down"></use></svg>
+        </div>
+      </div>
+      <div class="field">
         <label class="field__label" for="type">Ticket Type</label>
         <div class="select">
           <select class="field__value" required id="type">

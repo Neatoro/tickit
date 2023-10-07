@@ -45,6 +45,11 @@ export class Store {
     return new Store(state);
   }
 
+  static localStore(initialState = {}) {
+    const state = this.createReactiveObject(initialState);
+    return new Store(state);
+  }
+
   _updateBindings(event) {
     this._bindings.forEach(({ node, key, handler }) => {
       if (this._isRelevantUpdate(event.keys, key)) {

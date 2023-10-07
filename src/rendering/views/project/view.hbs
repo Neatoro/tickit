@@ -4,9 +4,6 @@
   <a href='/project/{{project.id}}'>{{project.name}}</a>
 </p>
 <h1 class='app__title'>{{project.id}} - {{project.name}}</h1>
-<div class="action-bar">
-  <button class="button" id="createTicketButton">Create Ticket</button>
-</div>
 <table class='table-list box'>
   <thead class='table-list__header'>
     <th>
@@ -35,5 +32,4 @@
     {{/each}}
   </tbody>
 </table>
-{{> dialogs/create_ticket project=project }}
 {{/layout}}

@@ -3,16 +3,12 @@ import { h } from '../../common/render.js';
 
 const store = Store.initStore();
 
-const createTicketButton = document.querySelector('#createTicketButton');
 const createTicketDialog = document.querySelector('#createTicketDialog');
 
-createTicketButton.addEventListener('click', (event) => {
-  event.preventDefault();
-  createTicketDialog.showModal();
-});
-
 createTicketDialog.addEventListener('success', (event) => {
-  store.state.tickets = [...store.state.tickets, event.ticket];
+  if (event.ticket.project === store.state.project.id) {
+    store.state.tickets = [...store.state.tickets, event.ticket];
+  }
 });
 
 store.addBinding(

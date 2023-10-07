@@ -1,7 +1,12 @@
 import { Store } from '../common/store.js';
 import { h, createIcon } from '../common/render.js';
+import { loadProjects } from '../services/projects.js';
 
 const store = Store.initStore();
+const localStore = Store.localStore({
+  project: undefined,
+  type: undefined
+});
 
 class TicketCreatedEvent extends Event {
   constructor(ticket) {
@@ -85,18 +90,81 @@ async function renderTypeFields(project, type) {
   typeFields.forEach((typeField) => fieldset.appendChild(typeField));
 }
 
+async function renderProjectOptions(projects) {
+  const projectSelect = document.querySelector('#project');
+
+  const options = projects.map((project) =>
+    h(
+      'option',
+      {
+        value: project.id
+      },
+      [`${project.name} (${project.id})`]
+    )
+  );
+
+  [...options].forEach((option) => projectSelect.appendChild(option));
+
+  if (store.state.project) {
+    projectSelect.value = store.state.project.id;
+  }
+}
+
+async function renderTypeOptions(types) {
+  const typeSelect = document.querySelector('#type');
+  [...typeSelect.querySelectorAll('option')].forEach((option) =>
+    option.remove()
+  );
+
+  const options = types.map((type) => h('option', {}, [type.name]));
+
+  [...options].forEach((option) => typeSelect.appendChild(option));
+
+  if (store.state.project) {
+    typeSelect.value = types[0].name;
+  }
+}
+
 (async () => {
+  const createTicketButton = document.querySelector('#createTicketButton');
   const dialog = document.querySelector('#createTicketDialog');
+
   const form = dialog.querySelector('form');
-
-  const project = store.state.project.id;
-  const initalType = store.state.project.tickettypes[0].name;
-
-  await renderTypeFields(project, initalType);
-
   const typeSelect = form.querySelector('#type');
+
+  createTicketButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    dialog.showModal();
+  });
+
+  if (!store.state.projects) {
+    store.state.projects = await loadProjects();
+    await renderProjectOptions(store.state.projects);
+  }
+
+  localStore.addBinding(undefined, 'type', ({ state }) =>
+    renderTypeFields(localStore.state.project, state.type)
+  );
+
+  localStore.addBinding(undefined, 'project', async ({ state }) => {
+    const fullProject = store.state.projects.find(
+      (project) => project.id === state.project
+    );
+    await renderTypeOptions(fullProject.tickettypes);
+    localStore.state.type = fullProject.tickettypes[0].name;
+    typeSelect.value = localStore.state.type;
+  });
+
+  const project = store.state.project || store.state.projects[0];
+  localStore.state.project = project.id;
+
   typeSelect.addEventListener('change', async (event) => {
-    await renderTypeFields(project, event.target.value);
+    localStore.state.type = event.target.value;
+  });
+
+  const projectSelect = document.querySelector('#project');
+  projectSelect.addEventListener('change', async (event) => {
+    localStore.state.project = event.target.value;
   });
 
   dialog.addEventListener('close', () => {
@@ -123,7 +191,9 @@ async function renderTypeFields(project, type) {
   confirmButton.addEventListener('click', async (event) => {
     event.preventDefault();
     if (form.checkValidity()) {
-      const fields = [...dialog.querySelectorAll('form .field__value')]
+      const fields = [
+        ...dialog.querySelectorAll('form .field__value:not([data-ignore])')
+      ]
         .filter((input) => input.value)
         .reduce(
           (acc, input) => ({ ...acc, [input.getAttribute('id')]: input.value }),
@@ -138,8 +208,8 @@ async function renderTypeFields(project, type) {
         },
         body: JSON.stringify({
           summary,
-          type,
-          project: store.state.project.id,
+          type: localStore.state.type,
+          project: localStore.state.project,
           fields: rest
         })
       });
