@@ -21,7 +21,9 @@
     "build:frontend": "vite build",
     "pkg": "pkg .",
     "test:api": "npm run build && npm run test:api:ci",
-    "test:api:ci": "node test/api/jasmine.js"
+    "test:api:ci": "node test/api/jasmine.js",
+    "test:e2e": "npm run build && npm run test:e2e:ci",
+    "test:e2e:ci": "node test/e2e/jasmine.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -62,6 +64,7 @@
     "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
     "prettier": "^3.0.3",
+    "puppeteer": "^21.3.8",
     "rollup": "^3.29.3",
     "rollup-plugin-copy": "^3.5.0",
     "ts-node": "^10.9.1",

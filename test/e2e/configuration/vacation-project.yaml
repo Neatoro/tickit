@@ -1,0 +1,47 @@
+id: VT
+
+name: Vacation Trip
+
+status:
+  - name: Open
+    type: open
+    default: true
+  - name: In Progress
+    type: in_progress
+  - name: Done
+    type: done
+
+tickettypes:
+  - name: Task
+    fields:
+      - id: description
+        name: Description
+        type: longtext
+        required: true
+    workflow:
+      - status: Open
+        transitions:
+          - name: Start Progress
+            target: In Progress
+      - status: In Progress
+        transitions:
+          - name: Reopen
+            target: Open
+      - status: Done
+        transitionFromAll: true
+        transitions:
+          - name: Reopen
+            target: Open
+
+boards:
+  - name: Project Board
+    columns:
+      - name: Open
+        status:
+          - Open
+      - name: In Progress
+        status:
+          - In Progress
+      - name: Done
+        status:
+          - Done

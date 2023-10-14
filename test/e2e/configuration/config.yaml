@@ -1,0 +1,9 @@
+port: 5001
+
+database:
+  type: sqlite
+  database: test/e2e/test.db
+
+projects:
+  - vacation-project
+  - project-two
