@@ -9,7 +9,7 @@ module.exports = class PuppeteerHelper {
   static async init() {
     const browser = await puppeteer.launch({
       args: ['--no-sandbox'],
-      headless: 'new'
+      headless: false
     });
     const helper = new PuppeteerHelper({
       browser,
@@ -21,6 +21,10 @@ module.exports = class PuppeteerHelper {
 
   async goto(path) {
     const fullUrl = `http://localhost:5001${path}`;
+
+    if (this.page.url() === fullUrl) {
+      await this.page.reload();
+    }
 
     await this.page.goto(fullUrl);
   }
