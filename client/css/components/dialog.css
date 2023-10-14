@@ -1,0 +1,44 @@
+.dialog {
+  width: 80%;
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+@media (min-width: 768px) {
+  .dialog {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .dialog {
+    width: 30%;
+  }
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dialog__header {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.dialog__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.dialog__close {
+  border: none;
+  background-color: transparent;
+  margin-left: auto;
+
+  cursor: pointer;
+}
+
+.dialog__close .icon {
+  margin: 0;
+}

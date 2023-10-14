@@ -1,0 +1,73 @@
+.fieldset__legend {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field:has([required]) .field__label:after {
+  content: '*';
+  color: var(--secondary-color);
+}
+
+.field__label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.select,
+.input {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 60ch;
+  border: var(--input-border);
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1.1;
+  font-size: 1rem;
+}
+
+.textarea {
+  resize: none;
+  font-family: inherit;
+}
+
+.select:has(select:focus),
+.input:focus {
+  border: 1px solid var(--secondary-color);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.input {
+  outline: none;
+  padding: 4px 8px;
+}
+
+.select select {
+  outline: none;
+  appearance: none;
+  font-size: 1rem;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.select {
+  display: grid;
+  grid-template-areas: 'select';
+  align-items: center;
+}
+
+.select select,
+.select .icon {
+  grid-area: select;
+}
+
+.select .icon {
+  justify-self: end;
+  pointer-events: none;
+  margin-right: 4px;
+}

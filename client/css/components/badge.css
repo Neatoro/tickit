@@ -1,0 +1,18 @@
+.badge {
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: var(--box-radius);
+}
+
+.badge-status-open {
+  background-color: var(--primary-color);
+}
+
+.badge-status-in_progress {
+  background-color: var(--secondary-color);
+}
+
+.badge-status-done {
+  background-color: var(--green);
+}

@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=fallback');
+
+@import 'reset.css';
+
+@import 'components/action-bar.css';
+@import 'components/badge.css';
+@import 'components/box.css';
+@import 'components/breadcumb.css';
+@import 'components/button.css';
+@import 'components/dialog.css';
+@import 'components/form.css';
+@import 'components/kanban.css';
+@import 'components/navigation.css';
+@import 'components/table-list.css';
+@import 'components/ticket-field.css';
+
+:root {
+  --main-background: #edede9;
+
+  --box-background: #fff;
+  --box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  --box-radius: 8px;
+
+  --base-font-color: #333;
+
+  --primary-color: #012b51;
+  --secondary-color: #fe5d26;
+
+  --green: #2fbf71;
+  --red: #ff5e5b;
+
+  --input-border: 1px solid #777;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+body {
+  background-color: var(--main-background);
+  font-family: 'Titillium Web', sans-serif;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 80px 1fr;
+}
+
+.app__header {
+  background-color: var(--box-background);
+  box-shadow: var(--box-shadow);
+  z-index: 1;
+}
+
+.app__content {
+  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1500px) {
+  .app__content__container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.app__title {
+  font-weight: 700;
+  font-size: 2rem;
+
+  margin-bottom: 16px;
+
+  color: var(--primary-color);
+}
+
+.icon {
+  display: inline-block;
+  width: 1.3rem;
+  height: 1.3rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  margin-right: 16px;
+}
+
+.action-bar {
+  margin-bottom: 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

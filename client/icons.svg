@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+    style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+        <symbol id="icon-folder_open" viewBox="0 0 24 24">
+            <path
+                d="M20.016 18V8.016H3.985V18h16.031zm0-12q.797 0 1.383.609t.586 1.406v9.984q0 .797-.586 1.406t-1.383.609H3.985q-.797 0-1.383-.609t-.586-1.406v-12q0-.797.586-1.406t1.383-.609h6L12.001 6h8.016z" />
+        </symbol>
+        <symbol id="icon-developer_board" viewBox="0 0 24 24">
+            <path
+                d="M12 11.016h3.984v6H12v-6zM6 6.984h5.016V12H6V6.984zm6 0h3.984v3H12v-3zm-6 6h5.016v4.031H6v-4.031zm12 6V5.015H3.984v13.969H18zM21.984 9h-1.969v2.016h1.969v1.969h-1.969v2.016h1.969v2.016h-1.969v1.969q0 .797-.609 1.406T18 21.001H3.984q-.797 0-1.383-.609t-.586-1.406V5.017q0-.797.586-1.406t1.383-.609H18q.797 0 1.406.609t.609 1.406v1.969h1.969v2.016z" />
+        </symbol>
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <path d="M9.984 20.016H5.015V12h-3l9.984-9 9.984 9h-3v8.016h-4.969v-6H9.983v6z" />
+        </symbol>
+        <symbol id="icon-clear" viewBox="0 0 24 24">
+            <path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+        </symbol>
+        <symbol id="icon-keyboard_arrow_down" viewBox="0 0 24 24">
+            <path d="M7.406 8.578l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z"></path>
+        </symbol>
+    </defs>
+</svg>

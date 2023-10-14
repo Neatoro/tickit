@@ -7,6 +7,8 @@ import { TicketModule } from '../ticket/ticket.module';
 import { ValidationModule } from '../validations/validation.module';
 import { RenderingModule } from '../rendering/rendering.module';
 import { ProjectModule } from '../project/project.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -28,7 +30,9 @@ import { ProjectModule } from '../project/project.module';
     TicketModule,
     ProjectModule,
     ValidationModule,
-    RenderingModule
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client')
+    })
   ]
 })
 export class AppModule {}

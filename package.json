@@ -4,7 +4,9 @@
   "main": "dist/index.js",
   "bin": "dist/index.js",
   "pkg": {
-    "assets": [],
+    "assets": [
+      "dist/client"
+    ],
     "targets": [
       "node18"
     ],
@@ -14,8 +16,9 @@
     "dev": "nodemon -e ts,hbs,yaml -w ./example -w ./server -x ts-node server/index.ts --config=example/simple-project/config.yaml",
     "dev:frontend": "vite",
     "prettify": "prettier -w .",
-    "build": "run-s build:backend pkg",
+    "build": "run-s build:backend build:frontend pkg",
     "build:backend": "tsc",
+    "build:frontend": "vite build",
     "pkg": "pkg .",
     "test:api": "npm run build && npm run test:api:ci",
     "test:api:ci": "node test/api/jasmine.js"
@@ -26,6 +29,7 @@
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.2.5",
     "@nestjs/platform-express": "^10.2.5",
+    "@nestjs/serve-static": "^4.0.0",
     "@nestjs/typeorm": "^10.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
@@ -33,6 +37,7 @@
     "express": "^4.18.2",
     "hbs": "^4.2.0",
     "helmet": "^7.0.0",
+    "pinia": "^2.1.6",
     "rxjs": "^7.8.1",
     "sqlite3": "^5.1.6",
     "typeorm": "^0.3.17",
